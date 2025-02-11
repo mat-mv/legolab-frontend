@@ -1,87 +1,53 @@
+"use client";
+
+import React, { useRef, useState } from 'react';
 import Image from "next/image";
 import styles from "./page.module.css";
+import BotSliderItem from "../components/bot_slider_item";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+import {Navigation, Pagination } from 'swiper/modules';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+
+  return (
+    <section>
+      <h1>Alle Bots</h1>
+      <section className={styles.easy_bots}>
+        <h4>Einfache Bots</h4>
+        <div className={styles.slider_container}>
+          <span id="prev_button_1" className={["material-symbols-outlined", styles.prev_button].join(" ")}>chevron_left</span>
+          <Swiper slidesPerView={3} spaceBetween={32} navigation={{enabled: true, nextEl:"#next_button_1", prevEl:"#prev_button_1"}} pagination={{clickable: true,}} modules={[Pagination, Navigation]}>
+            <SwiperSlide><BotSliderItem href="/" title="Test 1" build_difficulty={1} code_difficulty={2} image="https://images.pexels.com/photos/28184434/pexels-photo-28184434/free-photo-of-meer-natur-wasser-blau.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" ><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</p></BotSliderItem></SwiperSlide>
+            <SwiperSlide><BotSliderItem href="/" title="Test 2" build_difficulty={2} code_difficulty={2} image="https://images.pexels.com/photos/28184434/pexels-photo-28184434/free-photo-of-meer-natur-wasser-blau.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" ><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</p></BotSliderItem></SwiperSlide>
+            <SwiperSlide><BotSliderItem href="/" title="Test 3" build_difficulty={3} code_difficulty={2} image="https://images.pexels.com/photos/28184434/pexels-photo-28184434/free-photo-of-meer-natur-wasser-blau.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" ><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</p></BotSliderItem></SwiperSlide>
+            <SwiperSlide><BotSliderItem href="/" title="Test 4" build_difficulty={4} code_difficulty={2} image="https://images.pexels.com/photos/28184434/pexels-photo-28184434/free-photo-of-meer-natur-wasser-blau.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" ><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</p></BotSliderItem></SwiperSlide>
+            <SwiperSlide><BotSliderItem href="/" title="Test 5" build_difficulty={5} code_difficulty={2} image="https://images.pexels.com/photos/28184434/pexels-photo-28184434/free-photo-of-meer-natur-wasser-blau.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" ><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</p></BotSliderItem></SwiperSlide>
+          </Swiper>
+          <span id="next_button_1" className={["material-symbols-outlined", styles.next_button].join(" ")}>chevron_right</span>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+      <section>
+        <h4>Fortgeschrittene Bots</h4>
+        <div className={styles.slider_container}>
+          <span id="prev_button_2" className={["material-symbols-outlined", styles.prev_button].join(" ")}>chevron_left</span>
+          <Swiper slidesPerView={3} spaceBetween={32} navigation={{enabled: true, nextEl:"#next_button_2", prevEl:"#prev_button_2"}} pagination={{clickable: true,}} modules={[Pagination, Navigation]}>
+            <SwiperSlide><BotSliderItem href="/" title="Test 1" build_difficulty={1} code_difficulty={2} image="https://images.pexels.com/photos/28184434/pexels-photo-28184434/free-photo-of-meer-natur-wasser-blau.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" ><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</p></BotSliderItem></SwiperSlide>
+            <SwiperSlide><BotSliderItem href="/" title="Test 2" build_difficulty={2} code_difficulty={2} image="https://images.pexels.com/photos/28184434/pexels-photo-28184434/free-photo-of-meer-natur-wasser-blau.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" ><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</p></BotSliderItem></SwiperSlide>
+            <SwiperSlide><BotSliderItem href="/" title="Test 3" build_difficulty={3} code_difficulty={2} image="https://images.pexels.com/photos/28184434/pexels-photo-28184434/free-photo-of-meer-natur-wasser-blau.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" ><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</p></BotSliderItem></SwiperSlide>
+            <SwiperSlide><BotSliderItem href="/" title="Test 4" build_difficulty={4} code_difficulty={2} image="https://images.pexels.com/photos/28184434/pexels-photo-28184434/free-photo-of-meer-natur-wasser-blau.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" ><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</p></BotSliderItem></SwiperSlide>
+            <SwiperSlide><BotSliderItem href="/" title="Test 5" build_difficulty={5} code_difficulty={2} image="https://images.pexels.com/photos/28184434/pexels-photo-28184434/free-photo-of-meer-natur-wasser-blau.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" ><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</p></BotSliderItem></SwiperSlide>
+          </Swiper>
+          <span id="next_button_2" className={["material-symbols-outlined", styles.next_button].join(" ")}>chevron_right</span>
+        </div>
+      </section>
+    </section>
+    
   );
 }
