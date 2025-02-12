@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <section>
-      <h1>Alle Bots</h1>
+      <h1>Das LEGO-Mindstorms-Handbuch: Spielend zur Informatik mit EV3-Robotern</h1>
       <section className={styles.easy_bots}>
         <h4>Einfache Bots</h4>
         <div className={styles.slider_container}>
