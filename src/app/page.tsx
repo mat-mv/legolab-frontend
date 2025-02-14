@@ -15,7 +15,7 @@ export default function Home() {
             <Button href="/contact" secondary={true}>Kontakt aufnehmen</Button></div>
         </div>
         <div>
-          <Image src="https://images.pexels.com/photos/28184434/pexels-photo-28184434/free-photo-of-meer-natur-wasser-blau.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" width={400} height={225} alt="Picture"></Image>
+          <Image className={styles.img} src="https://images.pexels.com/photos/28184434/pexels-photo-28184434/free-photo-of-meer-natur-wasser-blau.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" width={400} height={225} alt="Picture"></Image>
         </div>
       </section>
       <section className={styles.slider}>
