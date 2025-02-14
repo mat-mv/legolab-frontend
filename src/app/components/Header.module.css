@@ -2,7 +2,8 @@
     padding: 32px 0;
     background-color: var(--area);
     position: sticky;
-    top: 0;
+    position: -webkit-sticky;
+    top: 0px;
     z-index: 999;
 }
 
