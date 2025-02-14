@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: row;
     column-gap: 16px;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .info {
@@ -17,4 +17,16 @@
 
 .logo {
     color: var(--primary);
+}
+
+@media only screen and (max-width: 768px) {
+    .info {
+        flex-direction: column;
+        gap: 32px;
+    }
+    .links {
+        margin-top: 32px;
+        flex-direction: column;
+        gap: 16px;
+    }
 }
