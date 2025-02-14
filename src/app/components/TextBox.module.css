@@ -1,0 +1,20 @@
+.title::after {
+  content: " ›";
+}
+
+.text_box {
+  background-color: var(--area);
+  border-radius: 8px;
+  display: block;
+  padding: 16px;
+  flex-grow: 1;
+}
+
+.text_box:hover {
+  color: var(--foreground);
+}
+
+.text_box:hover .title {
+  color: var(--primary);
+  transition: color ease-in 100ms;
+}
