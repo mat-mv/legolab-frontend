@@ -16,7 +16,8 @@ body {
   max-width: 1300px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 16px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 main {
