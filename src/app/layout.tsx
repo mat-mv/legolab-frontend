@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
+import "material-symbols";
 
 import Footer from "@/app/components/footer"
 import Header from "@/app/components/header"
