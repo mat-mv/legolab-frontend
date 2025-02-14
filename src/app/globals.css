@@ -1,20 +1,29 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --area: #f4f4f4;
+  --primary: #D72305;
+  font-size: 16px;
 }
 
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
+  margin: 0 auto;
 }
+
+.content {
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 16px;
+}
+
+main {
+  margin-top: 128px;
+  margin-bottom: 256px;
+}
+
 
 body {
   color: var(--foreground);
@@ -35,8 +44,41 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+a:hover {
+  transition: color ease-in-out 300ms;
+  color: var(--primary)
 }
+
+h1 {
+  font-size: 3.5rem;
+    line-height: 3.75rem;
+}
+
+h2 {
+  font-size: 2.875rem;
+  line-height: 3.375rem;
+}
+
+h3 {
+  font-size: 2.25rem;
+  line-height: 2.75rem;
+}
+
+h4 {
+  font-size: 1.875rem;
+  line-height: 2.375rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+  line-height: 2.125rem;
+}
+
+h1, h2, h3, h4 {
+  margin-bottom: 0.75em;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
