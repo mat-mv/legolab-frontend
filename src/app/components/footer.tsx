@@ -1,31 +1,8 @@
+import Link from "next/link"
 import styles from "./Footer.module.css"
-import { fetchData } from "../utils/api"
+import Image from "next/image"
 
-interface Person {
-    id: number,
-    name: string,
-    role: string
-}
-
-interface Link {
-    id: number,
-    href: string,
-    label: string,
-    target: string
-}
-
-interface Props {
-    phone: string,
-    email: string,
-    person: Person[],
-    footer_links: Link[]
-}
-
-export default async function Footer() {
-
-    const strapiData:any = await fetchData("footer?populate=*")
-    const props:Props = strapiData.data
-
+export default function Header() {
     return (
         <footer className={styles.footer}>
             <section className="content">
@@ -33,20 +10,23 @@ export default async function Footer() {
                     <div>
                         <p className={styles.logo}><strong>Hochschule Karlsruhe</strong><br/>University of<br/>Applied Sciences</p>
                         <p>Fakultät für Informatik und Wirtschaftsinformatik</p>
-                        <p>Tel.: {props.phone}<br/>{props.email}</p>
+                        <p>Tel.: +49 721 925-1411<br/>matthias.mruzek-vering@h-ka.de</p>
                     </div>
                     <div>
-                        {props.person.map((p) => (
-                            <p key={p.id}><strong>{p.name}</strong><br/>{p.role}</p>
-                        ))}
+                        <p>
+                            <strong>Matthias Mruzek-Vering M.Sc.</strong><br/>Operative Leitung
+                        </p>
+                        <p>
+                            <strong>Prof. Dr. rer. pol. Uwe Haneke</strong><br/>Operative Leitung
+                        </p>
                     </div>
                 </div>
                 <div className={styles.links}>
-                    {props.footer_links.map((link) => (
-                        <a key={link.id} target={link.target} href={link.href}>{link.label}</a>
-                    ))}
+                    <a target="_blank" href="https://www.h-ka.de/impressum" rel="noopener noreferrer">Impressum</a>
+                    <a target="_blank" href="https://www.h-ka.de/datenschutz" rel="noopener noreferrer">Datenschutz</a>
                 </div>
             </section>
+            
         </footer>
     )
 }
