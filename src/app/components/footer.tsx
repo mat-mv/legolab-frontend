@@ -23,8 +23,8 @@ interface Footer {
 
 export default async function Footer() {
 
-    const footer:Footer = await fetchData("footer?populate=*")
-    console.log(footer)
+    const strapiData:any = await fetchData("footer?populate=*")
+    const footer:Footer = strapiData.data
 
     return (
         <footer className={styles.footer}>
