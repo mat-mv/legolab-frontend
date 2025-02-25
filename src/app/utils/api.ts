@@ -1,6 +1,6 @@
 // lib/api.ts
 export async function fetchData<T>(endpoint: string): Promise<T> {
-  const baseUrl = process.env.INTERNAL_API_URL || "https://www.legolab-karlsruhe.de/api/";
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://www.legolab-karlsruhe.de/api/";
 
   try {
     const response = await fetch(`${baseUrl}${endpoint}`);
