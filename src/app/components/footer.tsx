@@ -14,7 +14,7 @@ interface Link {
     target: string
 }
 
-interface Props {
+interface Footer {
     phone: string,
     email: string,
     person: Person[],
@@ -23,8 +23,8 @@ interface Props {
 
 export default async function Footer() {
 
-    const strapiData:any = await fetchData("footer?populate=*")
-    const props:Props = strapiData.data
+    const footer:Footer = await fetchData("footer?populate=*")
+    console.log(footer)
 
     return (
         <footer className={styles.footer}>
@@ -33,16 +33,16 @@ export default async function Footer() {
                     <div>
                         <p className={styles.logo}><strong>Hochschule Karlsruhe</strong><br/>University of<br/>Applied Sciences</p>
                         <p>Fakultät für Informatik und Wirtschaftsinformatik</p>
-                        <p>Tel.: {props.phone}<br/>{props.email}</p>
+                        <p>Tel.: {footer.phone}<br/>{footer.email}</p>
                     </div>
                     <div>
-                        {props.person.map((p) => (
+                        {footer.person.map((p) => (
                             <p key={p.id}><strong>{p.name}</strong><br/>{p.role}</p>
                         ))}
                     </div>
                 </div>
                 <div className={styles.links}>
-                    {props.footer_links.map((link) => (
+                    {footer.footer_links.map((link) => (
                         <a key={link.id} target={link.target} href={link.href}>{link.label}</a>
                     ))}
                 </div>
