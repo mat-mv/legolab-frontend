@@ -1,41 +1,40 @@
-"use client";
 import Link from "next/link"
 import styles from "./Header.module.css"
 import NavLink from "./nav_link"
-import { useState } from "react";
+import { fetchData } from "../utils/api";
+import MobileMenu from "./mobile_menu";
 
-export default function Header() {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-    };
+interface NavigationLink {
+    id: number,
+    href: string,
+    label: string,
+}
+
+export interface Header {
+    links: NavigationLink[],
+}
+
+
+
+export default async function Header() {
+
+    const strapiData:any = await fetchData("main-navigation?populate=*")
+    const header:Header = strapiData.data
+
 
     return (
         <header className={styles.header}>
-            <div className="content">
+            <div className={`content ${styles.desktop}`}>
                 <div className={styles.container}>
                     <Link href="/" className={styles.logo}>lego::lab</Link>
                     <ul className={styles.link_list}>
-                        <NavLink href="/buch">Buch</NavLink>
-                        <NavLink href="/labor">Labor</NavLink>
-                        <NavLink href="/mindstorms">MINDSTORMS®</NavLink>
-                        <NavLink href="/gestalten">Gestalten</NavLink>
-                        <NavLink href="/programmierung">Programmierung</NavLink>
-                        <NavLink href="/links">Links</NavLink>
-                        <NavLink href="/team">Team</NavLink>
+                        {header.links.map((l) => (
+                            <NavLink key={l.id} href={l.href}>{l.label}</NavLink>
+                        ))}
                     </ul>
-                    <button onClick={toggleMobileMenu} className={`material-symbols-outlined ${styles.menu_button}`}>{isMobileMenuOpen ? "close" : "menu"}</button>
-                </div>
-                <div className={`${styles.mobile_menu} ${isMobileMenuOpen ? styles.active : ""}`}>
-                    <NavLink href="/buch">Buch</NavLink>
-                    <NavLink href="/labor">Labor</NavLink>
-                    <NavLink href="/mindstorms">MINDSTORMS®</NavLink>
-                    <NavLink href="/gestalten">Gestalten</NavLink>
-                    <NavLink href="/programmierung">Programmierung</NavLink>
-                    <NavLink href="/links">Links</NavLink>
-                    <NavLink href="/team">Team</NavLink>
                 </div>
             </div>
+            <MobileMenu links={header.links}></MobileMenu>
         </header>
     )
 }

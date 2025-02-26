@@ -41,8 +41,18 @@
     margin-top: 16px;
 }
 
+.mobile {
+    display: none;
+}
+.desktop {
+    display: block;
+}
+
 @media only screen and (max-width: 1024px) {
-    .link_list {
+    .mobile {
+        display: block;
+    }
+    .desktop {
         display: none;
     }
     .container {
