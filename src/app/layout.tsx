@@ -23,6 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body className={plex.className}>
         <Header />
         <main className="content">
