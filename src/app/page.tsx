@@ -41,7 +41,7 @@ export default async function Home() {
         fields: ['url'],
       },
       'ctaButtons': {
-        fields: ['label', 'href']
+        fields: ['id', 'secondary', 'label', 'href']
       },
       'textBoxes': {
         populate: {
@@ -49,7 +49,7 @@ export default async function Home() {
             fields: ['url'],
           }
         },
-        fields: ['title', 'body', 'href'],
+        fields: ['id', 'title', 'body', 'href'],
       }
     },
   })
