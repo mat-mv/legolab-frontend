@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import Button from "./components/button";
 import TextBox from "./components/text_box"
 import { fetchData } from "./utils/api";
+import qs from "qs"
 
 
 interface Button {
@@ -12,11 +13,15 @@ interface Button {
   secondary: boolean,
 }
 
+interface Image {
+  url: string,
+}
+
 interface TextBox {
   id: number,
   title: string,
   body: string,
-  image: string,
+  icon: Image,
   href: string,
 }
 
@@ -25,11 +30,32 @@ interface HomePage {
   subHeading: string,
   ctaButtons: Button[],
   textBoxes: TextBox[],
+  heroImage: Image,
 }
 
 export default async function Home() {
 
-  const strapiData:any = await fetchData("home-page?populate=*")
+  const query = qs.stringify({
+    populate: {
+      'heroImage': {
+        fields: ['url'],
+      },
+      'ctaButtons': {
+        fields: ['label', 'href']
+      },
+      'textBoxes': {
+        populate: {
+          'icon' : {
+            fields: ['url'],
+          }
+        },
+        fields: ['title', 'body', 'href'],
+      }
+    },
+  })
+
+  const strapiData:any = await fetchData("home-page?" + query)
+  console.log(strapiData)
   const home:HomePage = strapiData.data
 
   return (
@@ -45,12 +71,12 @@ export default async function Home() {
           </div>
         </div>
         <div>
-          <Image className={styles.img} src="https://images.pexels.com/photos/28184434/pexels-photo-28184434/free-photo-of-meer-natur-wasser-blau.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" width={400} height={225} alt="Picture"></Image>
+          <Image className={styles.img} src={`https://www.legolab-karlsruhe.de${home.heroImage.url}`} width={400} height={225} alt="Picture"></Image>
         </div>
       </section>
       <section className={styles.slider}>
         {home.textBoxes.map((box) => (
-          <TextBox key={box.id} href={box.href} icon="/next.svg" title={box.title}><p>{box.body}</p></TextBox>
+          <TextBox key={box.id} href={box.href} icon={`https://www.legolab-karlsruhe.de${box.icon.url}`} title={box.title}><p>{box.body}</p></TextBox>
         ))}
       </section>
     </section>

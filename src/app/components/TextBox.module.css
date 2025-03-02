@@ -7,7 +7,7 @@
   border-radius: 8px;
   display: block;
   padding: 16px;
-  flex-grow: 1;
+  flex: 1;
 }
 
 .text_box:hover {
