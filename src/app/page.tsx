@@ -55,7 +55,6 @@ export default async function Home() {
   })
 
   const strapiData:any = await fetchData("home-page?" + query)
-  console.log(strapiData)
   const home:HomePage = strapiData.data
 
   return (
