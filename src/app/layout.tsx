@@ -1,4 +1,3 @@
-import type { Metadata, ResolvingMetadata } from "next";
 import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import "material-symbols";
@@ -22,7 +21,7 @@ const plex = IBM_Plex_Sans({
   subsets: ["latin"],
 });
 
-export async function generateMetadata(parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata() {
   const query = qs.stringify({
     populate: {
       'favicon': {
@@ -35,11 +34,11 @@ export async function generateMetadata(parent: ResolvingMetadata): Promise<Metad
   const meta:Meta = strapiData.data
 
   return {
-    title: meta.siteName,
-    description: meta.siteDescription,
+    title: meta.siteName || "lego::lab Karlsruhe",
+    description: meta.siteDescription || "lego::lab Karlsruhe | Hochschule Karlsruhe",
     icons: {
-      icon: new URL(meta.favicon.url, "https://www.legolab-karlsruhe.de")
-    }
+      icon: `https://www.legolab-karlsruhe.de${meta.favicon.url}` || "/favicon.ico",
+    },
   }
 }
 
@@ -51,9 +50,6 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </head>
       <body className={plex.className}>
         <Header />
         <main className="content">
