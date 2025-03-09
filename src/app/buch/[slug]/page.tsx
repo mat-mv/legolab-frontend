@@ -59,3 +59,9 @@ export default async function BotPage({params}: {params: {slug:string}}) {
     </section>
   )
 }
+
+export async function generateStaticParams() {
+
+  return [];
+
+}
