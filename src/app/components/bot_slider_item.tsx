@@ -14,7 +14,6 @@ interface BotSliderItemProps {
 
 
 export default function BotSliderItem({ title, href, children, image, build_difficulty, code_difficulty }: Readonly<BotSliderItemProps>) {
-
   const build_icons = []
 
   for (let i = 0; i < 5; i++) {
@@ -37,7 +36,9 @@ export default function BotSliderItem({ title, href, children, image, build_diff
 
   return(
     <Link href={href} className={styles.text_box}>
-      <Image src={image} width={400} height={225} alt="Image" className={styles.image}></Image>
+      {image ? (
+        <Image src={`https://www.legolab-karlsruhe.de${image}`} width={400} height={225} alt="Image" className={styles.image}></Image>
+      ) : ("")}
       <div className={styles.content}>
       <h4 className={styles.title}>{title}</h4>
       <div className={styles.build_icons}>

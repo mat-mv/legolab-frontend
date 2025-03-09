@@ -3,34 +3,24 @@ import styles from "./page.module.css";
 import Button from "./components/button";
 import TextBox from "./components/text_box"
 import { fetchData } from "./utils/api";
+import { Image as ImageInterface } from "./utils/interfaces/image.interface";
+import { Button as ButtonInterface } from "./utils/interfaces/button.interface";
 import qs from "qs"
-
-
-interface Button {
-  id: number,
-  label: string,
-  href: string,
-  secondary: boolean,
-}
-
-interface Image {
-  url: string,
-}
 
 interface TextBox {
   id: number,
   title: string,
   body: string,
-  icon: Image,
+  icon: ImageInterface,
   href: string,
 }
 
 interface HomePage {
   header: string,
   subHeading: string,
-  ctaButtons: Button[],
+  ctaButtons: ButtonInterface[],
   textBoxes: TextBox[],
-  heroImage: Image,
+  heroImage: ImageInterface,
 }
 
 export default async function Home() {
