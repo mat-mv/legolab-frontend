@@ -4,7 +4,11 @@ import qs from "qs"
 import styles from "./page.module.css"
 import Image from "next/image";
 
-export default async function BotPage({params}: {params: {slug:string}}) {
+type Params = Promise<{ slug: string }>
+
+export default async function BotPage(props: {params: Params}) {
+  const params = await props.params;
+
   const query = qs.stringify({
     populate: {
       image: {
@@ -61,7 +65,30 @@ export default async function BotPage({params}: {params: {slug:string}}) {
 }
 
 export async function generateStaticParams() {
+  const query = qs.stringify({
+    filters: {
+      slug: {
+        $notNull: true,
+      },
+      category: {
+        parent: {
+          name: {
+            $eq: 'Buch'
+          }
+        }
+      }
+    },
+  });
 
-  return [];
+  const strapiData: any = await fetchData("bots?" + query);
+  const bots:Bot[] = strapiData.data
 
+  if (!strapiData.data || !Array.isArray(strapiData.data)) {
+    console.error("⚠️ No data returned from API for static params!");
+    return [];
+  }
+
+  return bots.map((bot) => ({
+    slug: bot.slug
+  }))
 }

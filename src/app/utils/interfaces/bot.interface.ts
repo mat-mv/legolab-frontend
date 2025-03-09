@@ -8,5 +8,5 @@ export interface Bot {
   shortDescription: string,
   description: string,
   image: Image,
-  slug: Image,
+  slug: string,
 }
