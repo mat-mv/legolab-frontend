@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 import { fetchData } from "../utils/api";
 import { Category } from "../utils/interfaces/category.interface";
 
-export default async function Home() {
+export default async function Buch() {
 
   const query = qs.stringify({
       populate: {
@@ -27,14 +27,13 @@ export default async function Home() {
     const strapiData:any = await fetchData("categories?" + query)
     const categories:Category[] = strapiData.data
 
-  return (
-    <section>
-      <h1>Das LEGO-Mindstorms-Handbuch: Spielend zur Informatik mit EV3-Robotern</h1>
-      {categories.map((category) => (
-        <BotCategory key={category.id} name={category.name} parent={undefined} subCategories={[]} id={0} ></BotCategory>
-      ))}
-      
-    </section>
     
-  );
+    return (
+      <section>
+        <h1>Das LEGO-Mindstorms-Handbuch: Spielend zur Informatik mit EV3-Robotern</h1>
+        {categories.map((category) => (
+          <BotCategory key={category.id} name={category.name} parent={undefined} subCategories={[]} id={0} ></BotCategory>
+        ))}
+      </section>
+    );
 }

@@ -25,6 +25,10 @@ export default async function BotCategory(category: Category) {
   const strapiData:any = await fetchData("bots?" + query)
   const bots:Bot[] = strapiData.data
 
+  if (bots.length === 0) {
+    return null;
+  }
+
   return(
     <section className={styles.container}>
         <h4>{category.name}</h4>

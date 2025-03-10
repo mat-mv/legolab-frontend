@@ -6,7 +6,7 @@ import Image from "next/image";
 
 type Params = Promise<{ slug: string }>
 
-export default async function BotPage(props: {params: Params}) {
+export default async function BotSinglePage(props: {params: Params}) {
   const params = await props.params;
 
   const query = qs.stringify({
@@ -19,6 +19,13 @@ export default async function BotPage(props: {params: Params}) {
       slug: {
           $eq: params.slug,
       },
+      category: {
+        parent: {
+          name: {
+            $eq: 'Buch'
+          }
+        }
+      }
     },
   })
   
@@ -62,33 +69,4 @@ export default async function BotPage(props: {params: Params}) {
       </div>
     </section>
   )
-}
-
-export async function generateStaticParams() {
-  const query = qs.stringify({
-    filters: {
-      slug: {
-        $notNull: true,
-      },
-      category: {
-        parent: {
-          name: {
-            $eq: 'Buch'
-          }
-        }
-      }
-    },
-  });
-
-  const strapiData: any = await fetchData("bots?" + query);
-  const bots:Bot[] = strapiData.data
-
-  if (!strapiData.data || !Array.isArray(strapiData.data)) {
-    console.error("⚠️ No data returned from API for static params!");
-    return [];
-  }
-
-  return bots.map((bot) => ({
-    slug: bot.slug
-  }))
 }

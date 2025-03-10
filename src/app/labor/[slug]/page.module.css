@@ -1,0 +1,51 @@
+@import "material-symbols";
+
+.material_symbols_outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.title::after {
+  content: " ›";
+}
+
+.text_box {
+  background-color: var(--area);
+  border-radius: 8px;
+  display: block;
+}
+
+.text_box:hover {
+  color: var(--foreground);
+}
+
+.text_box:hover .title {
+  color: var(--primary);
+  transition: color ease-in 100ms;
+}
+
+.content {
+  padding: 16px;
+}
+
+.build_icons {
+  display: flex;
+  column-gap: 8px;
+}
+
+.code_icons {
+  display: flex;
+  column-gap: 8px;
+  margin-bottom: 16px;
+}
+
+.inactive {
+  opacity: 25%;
+}
+
+.icon {
+  color: var(--foreground)
+}
