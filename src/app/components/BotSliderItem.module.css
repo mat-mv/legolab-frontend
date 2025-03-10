@@ -17,6 +17,7 @@
   aspect-ratio: 1 / 1;
   height: auto;
   border-radius: inherit;
+  object-fit: cover;
 }
 
 .text_box {
