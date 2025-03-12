@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import styles from "./BotSliderItem.module.css";
+import styles from "./BotSliderItem.module.css"
 
 interface BotSliderItemProps {
   title: string;

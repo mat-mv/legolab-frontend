@@ -1,7 +1,7 @@
 import { Category } from "../utils/interfaces/category.interface"
 import { fetchData } from "../utils/api"
 import qs from "qs"
-import BotSlider from "./bot_slider"
+import BotSlider from "./slider/bot_slider"
 import { Bot } from "../utils/interfaces/bot.interface"
 import styles from "./BotCategory.module.css"
 
@@ -31,7 +31,7 @@ export default async function BotCategory(category: Category) {
 
   return(
     <section className={styles.container}>
-        <h4>{category.name}</h4>
+        <h3>{category.name}</h3>
         <BotSlider bots={bots}/>
       </section>
   )

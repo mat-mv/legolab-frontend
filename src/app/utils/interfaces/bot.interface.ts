@@ -1,3 +1,4 @@
+import { Category } from "./category.interface";
 import { Image } from "./image.interface";
 
 export interface Bot {
@@ -9,4 +10,5 @@ export interface Bot {
   description: string,
   image: Image,
   slug: string,
+  category: Category,
 }

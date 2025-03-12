@@ -50,10 +50,11 @@
   margin-bottom: 16px;
 }
 
-.inactive {
-  opacity: 25%;
+.icon {
+  color: var(--primary)
 }
 
-.icon {
-  color: var(--foreground)
+.inactive {
+  color: var(--foreground);
+  opacity: 25%;
 }

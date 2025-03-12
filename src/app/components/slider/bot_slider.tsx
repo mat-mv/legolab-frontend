@@ -1,13 +1,13 @@
 "use client";
 
 import styles from "./BotSlider.module.css";
-import BotSliderItem from "./bot_slider_item";
+import BotSliderItem from "./items/bot_slider_item";
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import {Navigation, Pagination } from 'swiper/modules';
-import { Bot } from "../utils/interfaces/bot.interface";
+import { Bot } from "../../utils/interfaces/bot.interface";
 import { usePathname } from "next/navigation";
 
 
