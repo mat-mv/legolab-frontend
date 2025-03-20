@@ -15,6 +15,9 @@ export default async function BotSinglePage(props: { params: Params }) {
       image: {
         fields: ['url'],
       },
+      bom: {
+        fields: ['url','width','height'],
+      },
       'ctaButtons': {
         fields: ['id', 'secondary', 'label', 'href']
       },
@@ -80,9 +83,9 @@ export default async function BotSinglePage(props: { params: Params }) {
         {bot.description}
       </div>
       <h2>Bauteile</h2>
-      {bot.buildBOM ? (
-        <Image src={`https://www.legolab-karlsruhe.de${bot.buildBOM.url}`} width={400} height={225} alt="BOM" className={styles.image}></Image>
-      ) : ("BOM")}
+      {bot.bom ? (
+        <Image src={`https://www.legolab-karlsruhe.de${bot.bom.url}`} width={400} height={225} alt="BOM" className={styles.image}></Image>
+      ) : ("fehler")}
       <div className={styles.content}>
         {bot.buildHintText}
       </div>
