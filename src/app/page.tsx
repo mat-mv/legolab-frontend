@@ -5,21 +5,15 @@ import TextBox from "./components/text_box"
 import { fetchData } from "./utils/api";
 import { Image as ImageInterface } from "./utils/interfaces/image.interface";
 import { Button as ButtonInterface } from "./utils/interfaces/button.interface";
+import { TextBox as TextBoxInterface } from "./utils/interfaces/text_box.interface"
 import qs from "qs"
 
-interface TextBox {
-  id: number,
-  title: string,
-  body: string,
-  icon: ImageInterface,
-  href: string,
-}
 
 interface HomePage {
   header: string,
   subHeading: string,
   ctaButtons: ButtonInterface[],
-  textBoxes: TextBox[],
+  textBoxes: TextBoxInterface[],
   heroImage: ImageInterface,
 }
 
