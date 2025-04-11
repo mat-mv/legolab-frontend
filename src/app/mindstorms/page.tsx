@@ -11,6 +11,7 @@ export default async function Buch() {
           fields: ['url'],
         },
       },
+      sort: ['date:asc']
     })
     
     const strapiData:any = await fetchData("mindstorms?" + query)
