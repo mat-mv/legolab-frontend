@@ -43,7 +43,7 @@ export default async function BotSinglePage(props: { params: Params }) {
   const code_icons = []
 
   for (let i = 0; i < 5; i++) {
-    if (i < mindstorm.difficulty) {
+    if (i < mindstorm.interfaces) {
       code_icons.push(<span key={i} className={["material-symbols-outlined", styles.icon].join(" ")}>terminal</span>)
     } else {
       code_icons.push(<span key={i} className={["material-symbols-outlined", styles.icon, styles.inactive].join(" ")}>terminal</span>)
