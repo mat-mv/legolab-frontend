@@ -39,7 +39,7 @@ export default async function BotSinglePage(props: { params: Params }) {
   const strapiData: any = await fetchData("bots?" + query);
 
   // Debugging: API-Response ausgeben
-  console.log("Strapi API Response:", JSON.stringify(strapiData, null, 2));
+  // console.log("Strapi API Response:", JSON.stringify(strapiData, null, 2));
 
   const bot: Bot = strapiData.data[0];
 
