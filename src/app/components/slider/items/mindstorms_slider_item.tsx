@@ -4,11 +4,7 @@ import styles from "./MindstormsSliderItem.module.css";
 import { Mindstorm } from "../../../utils/interfaces/mindstorm.interface";
 
 export default function MindstormsSliderItem({ date, name, shortDescription, description, image, developerboard, legoSetNumber, infrared, bluetooth, codingTypes, interfaces, slug }: Readonly<Mindstorm>) {
-  const sortedCodingTypes = codingTypes
-    .split(",")
-    .map(s => s.trim())
-    .sort()
-    .join(", ");
+  const sortedCodingTypes = codingTypes.split(",").map(s => s.trim()).sort().join(", ");
 
   return (
     <Link href={slug} className={styles.text_box}>
