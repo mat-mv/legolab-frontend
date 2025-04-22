@@ -4,6 +4,12 @@ import styles from "./MindstormsSliderItem.module.css";
 import { Mindstorm } from "../../../utils/interfaces/mindstorm.interface";
 
 export default function MindstormsSliderItem({ date, name, shortDescription, description, image, developerboard, legoSetNumber, infrared, bluetooth, codingTypes, interfaces, slug }: Readonly<Mindstorm>) {
+  const sortedCodingTypes = codingTypes
+    .split(",")
+    .map(s => s.trim())
+    .sort()
+    .join(", ");
+
   return (
     <Link href={slug} className={styles.text_box}>
       {image ? (
@@ -39,7 +45,7 @@ export default function MindstormsSliderItem({ date, name, shortDescription, des
           </div>
           <div className={styles.iconItem}>
             <span className={["material-symbols-outlined", styles.icon].join(" ")}>code</span>
-            <span className={styles.iconLabel}>{codingTypes}</span>
+            <span className={styles.iconLabel}>{sortedCodingTypes}</span>
           </div>
         </div>
         <p className={styles.shortDescription}>{shortDescription}</p>
