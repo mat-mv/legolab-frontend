@@ -3,11 +3,17 @@ import { Image } from "./image.interface";
 
 export interface Mindstorm {
   id: number,
-  name: string,
-  difficulty: number,
-  description: string,
   image: Image,
+  name: string,
+  slug: string,
+  interfaces: number,
+  shortDescription: string,
+  description: string,
   date: string,
   bots: Bot[],
-  slug: string,
+  developerboard: String,
+  legoSetNumber: number,
+  infrared: boolean,
+  bluetooth: boolean,
+  codingTypes: string
 }

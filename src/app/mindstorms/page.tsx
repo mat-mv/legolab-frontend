@@ -20,7 +20,7 @@ export default async function Buch() {
     
     return (
       <section>
-        <h1>Alle Mindstorms</h1>
+        <h1>Entdecke die LEGO® MINDSTORMS® Produktserie</h1>
         <MindstormsSlider mindstorms={mindstorms} ></MindstormsSlider>
       </section>
     );
