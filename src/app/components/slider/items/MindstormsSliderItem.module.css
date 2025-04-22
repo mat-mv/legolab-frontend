@@ -50,6 +50,12 @@
   margin-bottom: 16px;
 }
 
+.interfaces_icons {
+  display: flex;
+  column-gap: 8px;
+  margin-bottom: 16px;
+}
+
 .icon {
   color: var(--primary)
 }
@@ -57,4 +63,22 @@
 .inactive {
   color: var(--foreground);
   opacity: 25%;
+}
+
+.iconWithText {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.iconItem {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.iconLabel {
+  font-size: 1.5rem;
 }
