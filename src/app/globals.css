@@ -3,6 +3,8 @@
   --foreground: #171717;
   --area: #f4f4f4;
   --primary: #D72305;
+  --border: #E4E4E4;
+  --placeholder: #888888;
   --border-radius: 8px;
   font-size: 16px;
 }
@@ -106,6 +108,25 @@ p {
 .swiper-pagination-bullet {
   transition: width 300ms ease-in-out;
   border-radius: 4px !important;
+}
+
+/* Input-Felder */
+
+input, textarea {
+  font-family: 'IBM Plex Sans', 'IBM Plex Sans Fallback';
+  border-radius: var(--border-radius);
+  border: 2px solid var(--border);
+  font-size: 1rem;
+  padding: 8px;
+  resize: none;
+}
+
+input:focus, textarea:focus {
+  outline: 0;
+}
+
+::placeholder {
+  color: var(--placeholder)
 }
 
 @media only screen and (max-width: 1024px) {
