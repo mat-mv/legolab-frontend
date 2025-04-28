@@ -4,7 +4,7 @@
 
 .text_box {
   background-color: var(--area);
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   display: block;
   padding: 16px;
   flex: 1;

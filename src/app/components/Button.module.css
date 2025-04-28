@@ -2,7 +2,7 @@
   padding: 6px 12px;
   background-color: var(--primary);
   border: 2px var(--primary) solid;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   color: white;
   transition: all ease-in 100ms;
   display: block;
