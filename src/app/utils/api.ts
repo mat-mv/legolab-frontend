@@ -17,7 +17,7 @@ export async function fetchData(endpoint: string) {
 
 export async function postData(endpoint: string, data: any) {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://www.legolab-karlsruhe.de/api/";
-  console.log(data);
+
   try {
     const response = await fetch(`${baseUrl}${endpoint}`, {
       method: "POST",
