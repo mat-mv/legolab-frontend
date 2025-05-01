@@ -1,5 +1,6 @@
 import styles from "./Footer.module.css"
 import { fetchData } from "../utils/api"
+import Link from "next/link"
 
 interface Person {
     id: number,
@@ -43,7 +44,7 @@ export default async function Footer() {
                 </div>
                 <div className={styles.links}>
                     {footer.footer_links.map((link) => (
-                        <a key={link.id} target={link.target} href={link.href}>{link.label}</a>
+                        <Link key={link.id} target={link.target} href={link.href}>{link.label}</Link>
                     ))}
                 </div>
             </section>
