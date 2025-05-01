@@ -13,12 +13,16 @@
     height: 10rem;
 }
 
-.error {
-    margin-top: 16px;
-    /* padding: 8px;
-    border-radius: var(--border-radius);
-    border: 2px solid var(--primary);
-    background-color: rgba(215, 35, 5, 0.2); */
+label.error {
     color: var(--primary);
-    font-size: 0.9em;
 }
+
+.message.error {
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+input.error, textarea.error {
+    border-color: var(--primary);
+}
+

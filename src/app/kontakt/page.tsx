@@ -18,33 +18,33 @@ export default function Kontakt() {
                 {formState?.message && <p>{formState.message}</p>}
                 {formState?.strapiErrors && <p>{formState.strapiErrors}</p>}
                 <div className={styles.input_field}>
-                <label htmlFor="vorname">Vorname</label>
+                <label htmlFor="vorname" className={formState?.zodErrors?.vorname && (styles.error)}>Vorname</label>
                 {formState?.zodErrors?.vorname && (
-                    <div className={styles.error}>
-                    {formState.zodErrors.vorname}
+                    <div className={[styles.error, styles.message].join(' ')}>
+                        {formState.zodErrors.vorname}
                     </div>
                 )}
-                <input id="vorname" name="vorname" type="text"></input>
+                <input id="vorname" name="vorname" type="text" className={formState?.zodErrors?.vorname && (styles.error)}></input>
                 
                 </div>
                 <div className={styles.input_field}>
-                <label htmlFor="nachname">Nachname</label>
-                <input id="nachname" name="nachname" type="text"></input>
-                {formState?.zodErrors?.nachname && <div className={styles.error}>{formState.zodErrors.nachname}</div>}
+                <label htmlFor="nachname" className={formState?.zodErrors?.nachname && (styles.error)}>Nachname</label>
+                {formState?.zodErrors?.nachname && <div className={[styles.error, styles.message].join(' ')}>{formState.zodErrors.nachname}</div>}
+                <input id="nachname" name="nachname" type="text" className={formState?.zodErrors?.nachname && (styles.error)}></input>
                 </div>
                 <div className={styles.input_field}>
-                <label htmlFor="email">E-Mail-Adresse</label>
-                <input id="email" name="eMailAdresse" type="email"></input>
-                {formState?.zodErrors?.eMailAdresse && <div className={styles.error}>{formState.zodErrors.eMailAdresse[0]}</div>}
+                <label htmlFor="email" className={formState?.zodErrors?.eMailAdresse && (styles.error)}>E-Mail-Adresse</label>
+                {formState?.zodErrors?.eMailAdresse && <div className={[styles.error, styles.message].join(' ')}>{formState.zodErrors.eMailAdresse[0]}</div>}
+                <input id="email" name="eMailAdresse" type="email" className={formState?.zodErrors?.nachname && (styles.error)}></input>
                 </div>
                 <div className={styles.input_field}>
-                <label htmlFor="nachricht">Nachricht</label>
-                <textarea id="nachricht" name="nachricht"></textarea>
+                <label htmlFor="nachricht" className={formState?.zodErrors?.nachricht && (styles.error)}>Nachricht</label>
                 {formState?.zodErrors?.nachricht && (
-                    <div className={styles.error}>
+                    <div className={[styles.error, styles.message].join(' ')}>
                     {formState.zodErrors.nachricht}
                     </div>
                 )}
+                <textarea id="nachricht" name="nachricht" className={formState?.zodErrors?.nachname && (styles.error)}></textarea>
                 </div>
                 <button disabled={isPending}>Absenden</button>
             </form>
