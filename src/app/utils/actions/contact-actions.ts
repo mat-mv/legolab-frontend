@@ -13,19 +13,22 @@ const schemaRegister = z.object({
 });
 
 export async function sendContactFormAction(prevState: any, formData: FormData) {
-    const validatedFields = schemaRegister.safeParse({
+    const rawData = {
         vorname: formData.get("vorname"),
         nachname: formData.get("nachname"),
         eMailAdresse: formData.get("eMailAdresse"),
         nachricht: formData.get("nachricht"),
-    });
+    }
+
+    const validatedFields = schemaRegister.safeParse(rawData);
 
     if (!validatedFields.success) {
         return {
             ...prevState,
             zodErrors: validatedFields.error.flatten().fieldErrors,
             strapiErrors: null,
-            message: "Fehlende Angaben. Bitte fülle alle Felder aus."
+            message: "Fehlende Angaben. Bitte fülle alle Felder aus.",
+            values: rawData,
         }
     }
 
@@ -37,6 +40,7 @@ export async function sendContactFormAction(prevState: any, formData: FormData) 
             strapiErrors: null,
             zodErrors: null,
             message: "Ops! Something went wrong. Please try again.",
+            values: rawData,
         };
     }
 
@@ -47,6 +51,7 @@ export async function sendContactFormAction(prevState: any, formData: FormData) 
             strapiErrors: responseData.error,
             zodErrors: null,
             message: "Failed to send message.",
+            values: rawData,
         };
     }
 
@@ -54,6 +59,7 @@ export async function sendContactFormAction(prevState: any, formData: FormData) 
         ...prevState,
         zodErrors: null,
         strapiErrors: null,
-        message: "Vielen Dank für deine Nachricht!"
+        message: "Vielen Dank für deine Nachricht!",
+        values: rawData,
     };
 }
