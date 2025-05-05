@@ -26,3 +26,22 @@ input.error, textarea.error {
     border-color: var(--primary);
 }
 
+.col_2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+}
+
+.contact_form {
+    padding: 32px;
+    border: 2px var(--border) solid;
+    border-radius: var(--border-radius);
+    grid-column: span 2;
+}
+
+.col_3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 64px;
+}
+

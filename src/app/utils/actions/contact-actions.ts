@@ -8,7 +8,7 @@ const schemaRegister = z.object({
     nachname: z.string().min(1, "Bitte gebe einen Nachnamen ein."),
     nachricht: z.string().min(1, "Bitte gebe eine Nachricht ein."),
     eMailAdresse: z.string()
-        .min(1, "Bitte gebe eine gültige E-Mail-Adresse ein.")
+        .min(1, "Diese Feld darf nicht leer sein.")
         .email("Bitte gebe eine gültige E-Mail-Adresse ein.")
 });
 
