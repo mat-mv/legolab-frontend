@@ -1,58 +1,24 @@
-"use client";
-
-import { useActionState } from "react";
-import { sendContactFormAction } from "@/app/utils/actions/contact-actions"
 import styles from "./page.module.css"
+import { fetchData } from "../utils/api";
+import ContactForm from "@/app/components/forms/contact_form"
 
-const INITIAL_STATE = {
-    data: null,
-};
+interface KontaktPage {
+    title: string,
+    description: string,
+}
 
-export default function Kontakt() {
+export default async function Kontakt() {
 
-    const [formState, formAction, isPending] = useActionState(sendContactFormAction, INITIAL_STATE);
+    const strapiData:any = await fetchData("kontakt")
+    const home:KontaktPage = strapiData.data
 
     return (
         <section className={styles.col_3}>
             <div>
-                <h1>Lorem ipsum dolor sit amet.</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, amet officia nihil vero hic porro nam quos id sunt quisquam unde magnam ratione neque impedit.</p>
+                <h1>{home.title}</h1>
+                <p>{home.description}</p>
             </div>
-            <form className={styles.contact_form} action={formAction}>
-                {formState?.message && <p>{formState.message}</p>}
-                {formState?.strapiErrors && <p>{formState.strapiErrors}</p>}
-                <div className={styles.col_2}>
-                    <div className={styles.input_field}>
-                        <label htmlFor="vorname" className={formState?.zodErrors?.vorname && (styles.error)}>Vorname</label>
-                        {formState?.zodErrors?.vorname && (
-                            <div className={[styles.error, styles.message].join(' ')}>
-                                {formState.zodErrors.vorname}
-                            </div>
-                        )}
-                        <input id="vorname" name="vorname" type="text" defaultValue={formState?.values?.vorname} className={formState?.zodErrors?.vorname && (styles.error)}></input>
-                    </div>
-                    <div className={styles.input_field}>
-                        <label htmlFor="nachname" className={formState?.zodErrors?.nachname && (styles.error)}>Nachname</label>
-                        {formState?.zodErrors?.nachname && <div className={[styles.error, styles.message].join(' ')}>{formState.zodErrors.nachname}</div>}
-                        <input id="nachname" name="nachname" type="text" defaultValue={formState?.values?.nachname} className={formState?.zodErrors?.nachname && (styles.error)}></input>
-                    </div>
-                </div>
-                <div className={styles.input_field}>
-                    <label htmlFor="email" className={formState?.zodErrors?.eMailAdresse && (styles.error)}>E-Mail-Adresse</label>
-                    {formState?.zodErrors?.eMailAdresse && <div className={[styles.error, styles.message].join(' ')}>{formState.zodErrors.eMailAdresse[0]}</div>}
-                    <input id="email" name="eMailAdresse" type="text" defaultValue={formState?.values?.eMailAdresse} className={formState?.zodErrors?.eMailAdresse && (styles.error)}></input>
-                </div>
-                <div className={styles.input_field}>
-                    <label htmlFor="nachricht" className={formState?.zodErrors?.nachricht && (styles.error)}>Nachricht</label>
-                    {formState?.zodErrors?.nachricht && (
-                        <div className={[styles.error, styles.message].join(' ')}>
-                            {formState.zodErrors.nachricht}
-                        </div>
-                    )}
-                    <textarea id="nachricht" name="nachricht" defaultValue={formState?.values?.nachricht} className={formState?.zodErrors?.nachricht && (styles.error)}></textarea>
-                </div>
-                <button disabled={isPending}>Absenden</button>
-            </form>
+            <ContactForm/>
         </section>
     );
 }
