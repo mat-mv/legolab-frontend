@@ -43,7 +43,7 @@ export default async function Team() {
         <section className={styles.box_section}>
         {members.map((member) => (
           
-          <div className={styles.item_box}>
+          <div className={styles.item_box} key={member.id}>
             {member.image ? (<Image src={`https://www.legolab-karlsruhe.de${member.image.url}`} width={400} height={225} alt="Image" className={styles.image}></Image>) : ("")}
 
             <div className={styles.row}>
