@@ -1,5 +1,4 @@
 import Link from "next/link";
-import styles from "./Button.module.css"
 
 interface ButtonProps {
   href: string;
@@ -9,7 +8,7 @@ interface ButtonProps {
 
 export default function Button({ href, children, secondary }: Readonly<ButtonProps>) {
   return(
-    <Link href={href} className={[secondary ? styles.secondary : "", styles.button].join(" ")}>
+    <Link href={href} className={[secondary ? "secondary" : "", "button"].join(" ")}>
       {children}
     </Link>
   )
