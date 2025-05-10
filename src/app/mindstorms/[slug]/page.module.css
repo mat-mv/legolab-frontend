@@ -37,6 +37,19 @@
   color: var(--primary)
 }
 
+.iconLabel {
+  color: var(--foreground);
+  font-size: 1.25rem;
+  align-items: center;
+  }
+
+.iconItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
 .inactive {
   color: var(--foreground);
   opacity: 25%;
