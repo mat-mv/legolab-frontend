@@ -7,7 +7,7 @@ import RelatedBotSlider from "@/app/components/slider/related_bots_slider";
 
 type Params = Promise<{ slug: string }>
 
-export default async function BotSinglePage(props: { params: Params }) {
+export default async function MindstormSinglePage(props: { params: Params }) {
   const params = await props.params;
 
   const query = qs.stringify({
@@ -38,38 +38,58 @@ export default async function BotSinglePage(props: { params: Params }) {
   })
 
   const strapiData: any = await fetchData("mindstorms?" + query)
-  const mindstorm: Mindstorm = strapiData.data[0]
-
-  const code_icons = []
-
-  for (let i = 0; i < 5; i++) {
-    if (i < mindstorm.difficulty) {
-      code_icons.push(<span key={i} className={["material-symbols-outlined", styles.icon].join(" ")}>terminal</span>)
-    } else {
-      code_icons.push(<span key={i} className={["material-symbols-outlined", styles.icon, styles.inactive].join(" ")}>terminal</span>)
-    }
-  }
+  const { name, image, date, description, legoSetNumber, interfaces, developerboard, bluetooth, infrared, codingTypes, bots } = strapiData.data[0] as Mindstorm;
+  const sortedCodingTypes = codingTypes ? codingTypes.split(",").map(item => item.trim()).sort().join(", "): "";
 
   return (
     <section>
-      <h1>{mindstorm.name}</h1>
+      <h1>{name}</h1>
       <section className={styles.content_section}>
         <div>
-          {mindstorm.image ? (
-            <Image src={`https://www.legolab-karlsruhe.de${mindstorm.image.url}`} width={400} height={225} alt="Image" className={styles.image}></Image>
+          {image ? (
+            <Image src={`https://www.legolab-karlsruhe.de${image.url}`} width={400} height={225} alt="Image" className={styles.image}></Image>
           ) : ("")}
         </div>
-        <div className={styles.content}>
-          <div className={styles.code_icons}>
-            {code_icons}
+        <div className={styles.iconWithText}>
+          <div className={styles.iconItem}>
+            <span className={["material-symbols-outlined", styles.icon].join(" ")}>event</span>
+            <span className={styles.iconLabel}>{new Date(date).getFullYear()}</span>
           </div>
-          {mindstorm.description}
+          <div className={styles.iconItem}>
+            <span className={["material-symbols-outlined", styles.icon].join(" ")}>numbers</span>
+            <span className={styles.iconLabel}>{legoSetNumber}</span>
+          </div>
+          <div className={styles.iconItem}>
+            <span className={["material-symbols-outlined", styles.icon].join(" ")}>developer_board</span>
+            <span className={styles.iconLabel}>{developerboard}</span>
+          </div>
+          <div className={styles.iconItem}>
+            <span className={["material-symbols-outlined", styles.icon].join(" ")}>open_jam</span>
+            <span className={styles.iconLabel}>{interfaces}</span>
+          </div>
+          <div className={styles.iconItem}>
+            {bluetooth && (
+              <span className={["material-symbols-outlined", styles.icon].join(" ")}>bluetooth</span>
+            )}
+            {infrared && (
+              <span className={["material-symbols-outlined", styles.icon].join(" ")}>infrared</span>
+            )}
+          </div>
+          <div className={styles.iconItem}>
+            <span className={["material-symbols-outlined", styles.icon].join(" ")}>code</span>
+            <span className={styles.iconLabel}>{sortedCodingTypes}</span>
+          </div>
+          <p>{description}</p>
         </div>
       </section>
-      <section className={styles.related_section}>
-        <h2>Verwendbar mit:</h2>
-        <div className={styles.related_bots}><RelatedBotSlider bots={mindstorm.bots}></RelatedBotSlider></div>
-      </section>
+      {bots && bots.length > 0 && (
+        <section className={styles.related_section}>
+          <h2>Verwendbar mit:</h2>
+          <div className={styles.related_bots}>
+            <RelatedBotSlider bots={bots} />
+          </div>
+        </section>
+      )}
     </section>
   )
 }
