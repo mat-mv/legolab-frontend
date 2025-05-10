@@ -124,7 +124,9 @@ h4 {
 }
 
 p {
+  margin-top: 1em;
   margin-bottom: 1em;
+  text-align: justify;
 }
 
 .material-symbols-outlined {
