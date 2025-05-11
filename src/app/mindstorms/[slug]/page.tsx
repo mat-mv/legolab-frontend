@@ -47,7 +47,7 @@ export default async function MindstormSinglePage(props: { params: Params }) {
       <section className={styles.content_section}>
         <div>
           {image ? (
-            <Image src={`https://www.legolab-karlsruhe.de${image.url}`} width={400} height={225} alt="Image" className={styles.image}></Image>
+            <Image src={`https://www.legolab-karlsruhe.de${image.url}`} width={400} height={400} alt="Image" className={styles.image}></Image>
           ) : ("")}
         </div>
         <div className={styles.iconWithText}>
