@@ -39,7 +39,13 @@ export default async function MindstormSinglePage(props: { params: Params }) {
 
   const strapiData: any = await fetchData("mindstorms?" + query)
   const { name, image, date, description, legoSetNumber, interfaces, developerboard, bluetooth, infrared, codingTypes, bots } = strapiData.data[0] as Mindstorm;
-  const sortedCodingTypes = codingTypes ? codingTypes.split(",").map(item => item.trim()).sort().join(", "): "";
+  const sortedCodingTypes = codingTypes
+  ? codingTypes
+      .split(",")
+      .map(item => item.trim())
+      .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+      .join(", ")
+  : "";
 
   return (
     <section>
