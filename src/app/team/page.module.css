@@ -1,0 +1,61 @@
+.hero_section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 128px;
+  flex-direction: column;
+}
+
+
+.image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+  object-fit: cover;
+}
+
+
+.box_section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+
+@media only screen and (max-width: 1024px) {
+  .box_section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .box_section {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
+.item_box {
+  background-color: var(--area);
+  border-radius: 16px;
+  display: block;
+  transition: background-color ease-in 100ms;
+  
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px;
+}
+
+.name {
+  font-weight: bold; /* Optional: Make the name stand out */
+}
+
+.semester {
+  text-align: right;
+  color: #666; /* Optional: Add a subtle color for the semester */
+}
