@@ -36,6 +36,13 @@
 }
 
 
+
+.zweiteReihe {
+  margin-top: 128px
+  
+}
+
+
 .item_box {
   background-color: var(--area);
   border-radius: 16px;
