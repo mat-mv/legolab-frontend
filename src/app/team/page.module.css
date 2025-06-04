@@ -66,3 +66,42 @@
   text-align: right;
   color: #666; /* Optional: Add a subtle color for the semester */
 }
+
+
+.ueberschriftLeiste {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin-bottom: 32px ;
+}
+
+
+.profList {
+  display: flex;
+  justify-content: flex-end; /* Rechtsbündig */
+  align-items: center;
+  gap: 12px;
+  margin-left: 24px;
+}
+
+.profBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profAvatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+  border: 4px solid var(--border); /* Optional: leichter Rahmen */
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+.profBeschreibung{
+  color: var(--primary);
+}

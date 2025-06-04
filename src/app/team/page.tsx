@@ -53,6 +53,8 @@ export default async function Team() {
   const strapiData2: any = await fetchData("teammitglieder?" + query)
   const members: Teammember[] = strapiData2.data
 
+
+
   /*Funktioniert noch nicht
   const strapiData3: any = await fetchData("platzhalter-medias?" + query)
   const platzhalters: PlatzhalterMedia[] = strapiData3.data
@@ -67,14 +69,48 @@ export default async function Team() {
 
   return (
     <section>
-      <section className={[styles.hero_section].join(" ")}>
-        <h1>{teampage.title}</h1>
+      <section  className={styles.ueberschriftLeiste}>
+
+        <h1 className={[styles.hero_section].join(" ")}>{teampage.title}</h1>
+
+        {/*---------Hier kommen alle Professoren hin---------*/}
+        <div className={styles.profList}>
+          {members
+            .filter(member =>
+              Array.isArray(member.taetigkeit) &&
+              member.taetigkeit.some(t => t.arbeit === "Professor")
+            )
+            .map(member => (
+              <div key={member.id} className={styles.profBlock}>
+                <Image
+                  src={`https://www.legolab-karlsruhe.de${member.image.url}`}
+                  alt={member.name}
+                  width={128}
+                  height={128}
+                  className={styles.profAvatar}
+                  title={member.name}
+                />
+
+                <span className={styles.name}>{member.name}</span>
+
+                {member.name.includes("Uwe") && (
+                  <span className={styles.profBeschreibung}>Beschreibung 1</span>
+                )}
+                {member.name.includes("Mruzek") && (
+                  <span className={styles.profBeschreibung}>Beschreibung 2</span>
+                )}
+              </div>
+            ))}
+        </div>
+
+
+
       </section>
 
       <h3>{teampage.description}</h3>
 
 
-{/*Funktioniert noch nicht
+      {/*Funktioniert noch nicht
       {platzhalterAvatar && platzhalterAvatar.image?.url && (
         <Image
           src={`https://www.legolab-karlsruhe.de${platzhalterAvatar.image.url}`}
@@ -87,12 +123,19 @@ export default async function Team() {
 
 
 
+
+
+
+
       {/*---------Hier kommen alle aktuellen Leute hin---------*/}
       <section className={styles.box_section}>
 
         {members.filter(member =>
           Array.isArray(member.taetigkeit) &&
           member.taetigkeit.some(t => t.semester === semesterString)
+          &&
+          member.taetigkeit.some(t => t.arbeit !== "Professor")
+          
         )
           .map((member) => (
 
@@ -127,6 +170,8 @@ export default async function Team() {
         {members.filter(member =>
           !Array.isArray(member.taetigkeit) ||
           !member.taetigkeit.some(t => t.semester === semesterString)
+          &&
+          member.taetigkeit.some(t => t.arbeit !== "Professor")
         )
           .map((member) => {
 
