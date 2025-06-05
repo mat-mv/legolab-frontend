@@ -82,7 +82,7 @@ export default async function Team() {
   const aktuelleMitglieder = members.filter(member =>
     Array.isArray(member.taetigkeit) &&
     member.taetigkeit.some(t => t.semester === semesterString) &&
-    member.taetigkeit.some(t => t.arbeit !== "Professor")
+    member.taetigkeit.some(t => t.arbeit !== "Leitung")
   );
 
 
@@ -102,7 +102,9 @@ export default async function Team() {
           {members
             .filter(member =>
               Array.isArray(member.taetigkeit) &&
-              member.taetigkeit.some(t => t.arbeit === "Professor")
+              member.taetigkeit.some(t => {
+                return t.arbeit === "Leitung";
+              })
             )
             .map(member => (
               <div key={member.id} className={styles.profBlock}>
@@ -150,7 +152,7 @@ export default async function Team() {
               Array.isArray(member.taetigkeit) &&
               member.taetigkeit.some(t => t.semester === semesterString)
               &&
-              member.taetigkeit.some(t => t.arbeit !== "Professor")
+              member.taetigkeit.some(t => t.arbeit !== "Leitung")
             )
               .map((member) => (
                 <div className={styles.item_box} key={member.id}>
@@ -184,7 +186,7 @@ export default async function Team() {
           !Array.isArray(member.taetigkeit) ||
           !member.taetigkeit.some(t => t.semester === semesterString)
           &&
-          member.taetigkeit.some(t => t.arbeit !== "Professor")
+          member.taetigkeit.some(t => t.arbeit !== "Leitung")
         )
           .map((member) => {
 
