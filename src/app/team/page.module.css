@@ -96,7 +96,8 @@
   border-radius: 50%;
   object-fit: cover;
   margin-right: 8px;
-  border: 4px solid var(--border); /* Optional: leichter Rahmen */
+  border: 2px solid var(--area); /* Optional: leichter Rahmen */
+  box-shadow: 0 0px 8px var(--border); /* Drop-Shadow */
   display: inline-block;
   vertical-align: middle;
 }

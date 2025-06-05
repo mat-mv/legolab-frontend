@@ -4,6 +4,7 @@ import { fetchData } from "../utils/api"; import qs from "qs";
 import { Teammember } from "../utils/interfaces/teammember.interface";
 import { PlatzhalterMedia } from "../utils/interfaces/platzhalter_media.interface";
 import MemberKachel from "@/app/components/member_kachel"
+import { getImageUrl } from "../utils/getImageUrl";
 
 interface TeamPage {
   title: string,
@@ -13,10 +14,14 @@ interface TeamPage {
 
 export default async function Team() {
 
+
+  //Bekomme das aktuelle Semeester
   const currentYear = new Date().getFullYear().toString();
   const month = new Date().getMonth() + 1;
   const currentSemester = month >= 4 && month <= 9 ? "SoSe" : "WiSe";
   const semesterString = `${currentSemester}${currentYear}`;
+
+
 
   const query = qs.stringify({
     populate: {
@@ -47,29 +52,48 @@ export default async function Team() {
     },
   })
 
+  const query2 = qs.stringify({
+    populate: {
+      bild: {
+        fields: ['url'],
+      },
+
+
+    }
+
+  })
+
+
   const strapiData1: any = await fetchData("team?")
   const teampage: TeamPage = strapiData1.data
 
   const strapiData2: any = await fetchData("teammitglieder?" + query)
   const members: Teammember[] = strapiData2.data
 
-
-
-  /*Funktioniert noch nicht
-  const strapiData3: any = await fetchData("platzhalter-medias?" + query)
+  const strapiData3: any = await fetchData("platzhalter-medias?" + query2)
   const platzhalters: PlatzhalterMedia[] = strapiData3.data
   const platzhalterAvatar = platzhalters.find(
     (p) => p.name === "PlatzhalterAvatar"
   );
-*/
 
+
+  //Mache eine Liste an aktuellen Mitgliedern, 
+  // um zu schauen ob der erste Block angezeigt werden soll
+  const aktuelleMitglieder = members.filter(member =>
+    Array.isArray(member.taetigkeit) &&
+    member.taetigkeit.some(t => t.semester === semesterString) &&
+    member.taetigkeit.some(t => t.arbeit !== "Professor")
+  );
 
 
 
 
   return (
     <section>
-      <section  className={styles.ueberschriftLeiste}>
+      <section className={styles.ueberschriftLeiste}>
+
+
+
 
         <h1 className={[styles.hero_section].join(" ")}>{teampage.title}</h1>
 
@@ -82,15 +106,16 @@ export default async function Team() {
             )
             .map(member => (
               <div key={member.id} className={styles.profBlock}>
+                {/*Bild*/}
                 <Image
-                  src={`https://www.legolab-karlsruhe.de${member.image.url}`}
+                  src={getImageUrl(member.image, platzhalterAvatar)}
                   alt={member.name}
                   width={128}
                   height={128}
                   className={styles.profAvatar}
                   title={member.name}
                 />
-
+                {/*Beschreibung*/}
                 <span className={styles.name}>{member.name}</span>
 
                 {member.name.includes("Uwe") && (
@@ -107,20 +132,6 @@ export default async function Team() {
 
       </section>
 
-      <h3>{teampage.description}</h3>
-
-
-      {/*Funktioniert noch nicht
-      {platzhalterAvatar && platzhalterAvatar.image?.url && (
-        <Image
-          src={`https://www.legolab-karlsruhe.de${platzhalterAvatar.image.url}`}
-          alt="Platzhalter Avatar"
-          width={200}
-          height={200}
-        />
-      )}
-*/}
-
 
 
 
@@ -128,35 +139,37 @@ export default async function Team() {
 
 
       {/*---------Hier kommen alle aktuellen Leute hin---------*/}
-      <section className={styles.box_section}>
+      {aktuelleMitglieder.length > 0 && ( // Nur anzeigen, wenn es aktuelle Mitglieder gibt
+        <section>
+          {/*Erste Unterüberschrift*/}
+          <h3>{teampage.description}</h3>
 
-        {members.filter(member =>
-          Array.isArray(member.taetigkeit) &&
-          member.taetigkeit.some(t => t.semester === semesterString)
-          &&
-          member.taetigkeit.some(t => t.arbeit !== "Professor")
-          
-        )
-          .map((member) => (
+          {/*Filtert alle Mitglieder, die dieses Semester haben und keine Profs sind*/}
+          <section className={styles.box_section}>
+            {members.filter(member =>
+              Array.isArray(member.taetigkeit) &&
+              member.taetigkeit.some(t => t.semester === semesterString)
+              &&
+              member.taetigkeit.some(t => t.arbeit !== "Professor")
+            )
+              .map((member) => (
+                <div className={styles.item_box} key={member.id}>
 
-            <div className={styles.item_box} key={member.id}>
 
+                  <MemberKachel
+                    id={member.id}
+                    image={getImageUrl(member.image, platzhalterAvatar)}
+                    taetigkeit={member.taetigkeit}
+                    name={member.name}
+                    bots={member.bots} fach={member.fach}
+                    currentSemester={true}
+                  />
 
-              <MemberKachel
-                id={member.id}
-                image={`https://www.legolab-karlsruhe.de${member.image.url}`}
-                taetigkeit={member.taetigkeit}
-                name={member.name}
-                bots={member.bots} fach={member.fach}
-                currentSemester={true}
-              />
-
-            </div>
-
-          ))}
-
-      </section>
-
+                </div>
+              ))}
+          </section>
+        </section>
+      )}
 
       {/*---------Hier kommen alle Ehemaligen hin---------*/}
       <h3 className={styles.zweiteReihe}>
@@ -180,7 +193,7 @@ export default async function Team() {
                 <MemberKachel
                   id={member.id}
 
-                  image={`https://www.legolab-karlsruhe.de${member.image.url}`}
+                  image={getImageUrl(member.image, platzhalterAvatar)}
                   taetigkeit={member.taetigkeit}
                   name={member.name}
                   bots={member.bots}
