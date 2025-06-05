@@ -54,18 +54,48 @@
   border-radius: 16px;
   display: block;
   transition: background-color ease-in 100ms;
-  
 }
 
 
 
-.textKachel {
+.textKachelLinksOben {
   font-weight: bold; /* Optional: Make the name stand out */
-  line-height: 2.75rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 8px;
+  padding-left: 16px;
+}
+
+.textKachelRechtsOben {
+  font-weight: normal;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  margin-right: 16px;
+}
+
+.textKachelLinksUnten {
+  font-weight: normal;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--primary);
+  text-align: left;
+  margin-bottom: 8px;
   margin-left: 16px;
+}
+
+.textKachelRechtsUnten {
+  font-weight: normal;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--primary);
+  text-align: right;
+  margin-bottom: 8px;
+  margin-right: 16px;
 }
 
 
@@ -87,7 +117,6 @@
 
 .overlayContent {
   background: rgb(240, 240, 240);
-  padding: 20px;
   border-radius: 8px;
   width: 80%;
   max-width: 800px;
@@ -95,13 +124,13 @@
   position: relative;
   display: flex;
   flex-direction: column; /* Stellt sicher, dass Bots unterhalb von Bild und Text stehen */
-  gap: 20px; /* Abstand zwischen den Abschnitten */
+  gap: 32px; /* Abstand zwischen den Abschnitten */
 }
 
 .overlayContent .innerStructure {
   display: flex; /* Bild und Text nebeneinander */
   flex-direction: row; /* Horizontal ausgerichtet */
-  gap: 20px; /* Abstand zwischen Bild und Text */
+  gap: 8px; /* Abstand zwischen Bild und Text */
   align-items: flex-start; /* Bild und Text oben ausrichten */
 }
 
@@ -117,6 +146,13 @@
   display: flex;
   flex-direction: column; /* Text wird vertikal gestapelt */
   justify-content: flex-start; /* Inhalte oben ausrichten */
+  margin: 32px;
+}
+
+.overlayContent .titel {
+  flex-direction: column; /* Text wird vertikal gestapelt */
+  justify-content: flex-start; /* Inhalte oben ausrichten */
+  margin-bottom: 32px;
 }
 
 .bots {
@@ -124,7 +160,10 @@
   display: flex;
   flex-direction: row; /* Stellt sicher, dass Bots unterhalb von Bild und Text stehen */
   align-items: flex-start; /* Bild und Text oben ausrichten */
-  gap: 20px; /* Abstand zwischen den Abschnitten */
+  gap: 32px; /* Abstand zwischen den Abschnitten */
+  margin-left: 32px;
+  margin-right: 32px;
+  margin-bottom: 16px;
 }
 
 .botsKachel {
@@ -141,6 +180,19 @@
   align-items: flex-start; /* Bild/Text linksbündig */
   padding: 0; /* Kein Innenabstand */
 }
+
+.botsName {
+  padding-left: 8px;
+}
+
+
+.semesterList {
+  display: flex;
+  flex-wrap: wrap;         /* Zeilenumbruch bei Bedarf */
+  gap: 8px;                /* Abstand zwischen den Semestern */
+  margin-bottom: 8px;
+}
+
 
 .semesterKachel  {
   background: rgb(255, 255, 255);

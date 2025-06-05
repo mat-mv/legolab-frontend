@@ -36,6 +36,13 @@
 }
 
 
+
+.zweiteReihe {
+  margin-top: 128px
+  
+}
+
+
 .item_box {
   background-color: var(--area);
   border-radius: 16px;
@@ -58,4 +65,44 @@
 .semester {
   text-align: right;
   color: #666; /* Optional: Add a subtle color for the semester */
+}
+
+
+.ueberschriftLeiste {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin-bottom: 32px ;
+}
+
+
+.profList {
+  display: flex;
+  justify-content: flex-end; /* Rechtsbündig */
+  align-items: center;
+  gap: 32px;
+  margin-left: 24px;
+}
+
+.profBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profAvatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+  border: 2px solid var(--area); /* Optional: leichter Rahmen */
+  box-shadow: 0 0px 8px var(--border); /* Drop-Shadow */
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+.profBeschreibung{
+  color: var(--primary);
 }
