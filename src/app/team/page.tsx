@@ -119,10 +119,10 @@ export default async function Team() {
                 <span className={styles.name}>{member.name}</span>
 
                 {member.name.includes("Uwe") && (
-                  <span className={styles.profBeschreibung}>Beschreibung 1</span>
+                  <span className={styles.profBeschreibung}>Gesamtleitung</span>
                 )}
                 {member.name.includes("Mruzek") && (
-                  <span className={styles.profBeschreibung}>Beschreibung 2</span>
+                  <span className={styles.profBeschreibung}>Operative Leitung</span>
                 )}
               </div>
             ))}
