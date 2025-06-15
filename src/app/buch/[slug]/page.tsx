@@ -16,7 +16,7 @@ export default async function BotSinglePage(props: { params: Params }) {
         fields: ['url'],
       },
       bom: {
-        fields: ['url','width','height'],
+        fields: ['url', 'width', 'height'],
       },
       'ctaButtons': {
         fields: ['id', 'secondary', 'label', 'href']
@@ -24,7 +24,7 @@ export default async function BotSinglePage(props: { params: Params }) {
       // 'buildHintText': {
       //   fields: ['title', 'body']
       // }
-      },
+    },
     filters: {
       slug: {
         $eq: params.slug,
@@ -70,9 +70,16 @@ export default async function BotSinglePage(props: { params: Params }) {
   return (
     <section>
       <h1>{bot.name}</h1>
-      {bot.image ? (
-        <Image src={`https://www.legolab-karlsruhe.de${bot.image.url}`} width={400} height={225} alt="Image" className={styles.image}></Image>
-      ) : ("")}
+      <div className={styles.imageWrapper}>
+        {bot.image ? (
+          <Image
+            src={`https://www.legolab-karlsruhe.de${bot.image.url}`}
+            alt={bot.name}
+            fill
+            style={{ objectFit: "contain" }}
+          />
+        ) : null}
+      </div>
       <div className={styles.content}>
         <div className={styles.build_icons}>
           {build_icons}
@@ -82,23 +89,34 @@ export default async function BotSinglePage(props: { params: Params }) {
         </div>
         {bot.description}
       </div>
-      <h2>Bauteile</h2>
-      {bot.bom ? (
-        <Image src={`https://www.legolab-karlsruhe.de${bot.bom.url}`} width={400} height={225} alt="BOM" className={styles.image}></Image>
-      ) : ("fehler")}
+      <h2>{bot.buildHeader}</h2>
+      <div className={styles.imageWrapper}>
+        {bot.bom ? (
+          <Image
+            src={`https://www.legolab-karlsruhe.de${bot.bom.url}`}
+            alt={`${bot.name} BOM`}
+            fill
+            style={{ objectFit: "contain" }}
+          />
+        ) : ("Fehler: BOM ist nicht verfügbar oder konnte nicht geladen werden.")}
+      </div>
+      <div className={styles.ctas}>
+        {bot.ctaButtons?.map((button) => (
+          <Button key={button.id} href={button.href} secondary={button.secondary}>
+            {button.label}
+          </Button>
+        ))}
+      </div>
       <div className={styles.content}>
-        {bot.buildHintText}
+        {bot.buildDescription}
+        <div className={styles.hint}>
+          <b>{bot.buildHintHeader}</b>
+          {bot.buildHintDescription}
+        </div>
       </div>
       <h2>{bot.buildInstructionHeader}</h2>
       <div className={styles.content}>
         {bot.buildInstructionDescription}
-        <div className={styles.ctas}>
-          {bot.ctaButtons?.map((button) => (
-            <Button key={button.id} href={button.href} secondary={button.secondary}>
-              {button.label}
-            </Button>
-          ))}
-        </div>
       </div>
     </section>
   )

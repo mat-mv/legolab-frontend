@@ -29,6 +29,7 @@
 
 .content {
   padding: 16px;
+  margin-bottom: 16px;
 }
 
 .build_icons {
@@ -49,4 +50,16 @@
 .inactive {
   color: var(--foreground);
   opacity: 25%;
+}
+
+.hint {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 0.5em;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
 }

@@ -13,7 +13,10 @@ export interface Bot {
   category: Category,
   slug: string,
   bom: Media,
-  buildHintText: string,
+  buildHeader: string,
+  buildDescription: string,
+  buildHintHeader: string,
+  buildHintDescription: string,
   buildInstructionHeader: string,
   buildInstructionDescription: string,
   ctaButtons: ButtonInterface[];
