@@ -1,0 +1,45 @@
+.tabsHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.tabList {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  column-gap: 8px;
+  background-color: var(--area);
+  padding: 8px;
+  height: fit-content;
+  width: fit-content;
+}
+
+.tab {
+  transition: all ease 300ms;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.tab:hover {
+  background-color: var(--background);
+}
+
+.tab::marker {
+  content: none
+}
+
+.selectedTab {
+  opacity: 1;
+  background-color: var(--background);
+}
+
+.tabPanel {
+  margin-left: 16px;
+}
