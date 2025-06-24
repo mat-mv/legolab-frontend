@@ -46,7 +46,7 @@ export default function ContactForm() {
                     )}
                     <textarea id="nachricht" name="nachricht" defaultValue={formState?.values?.nachricht} className={formState?.zodErrors?.nachricht && (styles.error)}></textarea>
                 </div>
-                <button disabled={isPending}>Absenden</button>
+                <button className="button" disabled={isPending}>Absenden</button>
             </form>
     )
 }
