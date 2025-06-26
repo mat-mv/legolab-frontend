@@ -35,19 +35,20 @@ export default async function Team() {
       },
 
       bots: {
-        populate: {
-          image: {
-            fields: ['url'],
-          },
-          category: {
-            populate: {
-              parent: {
-                fields: ['name']
-              }
+      fields: ['name', 'slug'], // <--- hier beide Felder anfordern
+      populate: {
+        image: {
+          fields: ['url'],
+        },
+        category: {
+          populate: {
+            parent: {
+              fields: ['name']
             }
           }
         }
-      },
+      }
+    }
 
     },
   })
@@ -202,9 +203,6 @@ export default async function Team() {
                   fach={member.fach}
                   currentSemester={false}
                 />
-
-
-
 
               </div>
             );

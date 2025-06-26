@@ -47,9 +47,15 @@
   background-color: var(--area);
   border-radius: 16px;
   display: block;
-  transition: background-color ease-in 100ms;
+  cursor: pointer;
+  transition: background-color 100ms ease-in, box-shadow 0.2s, transform 0.2s;
   
 }
+
+.item_box:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+}
+
 
 .row {
   display: flex;
