@@ -15,11 +15,11 @@ interface MemberData {
   image: string;
   taetigkeit: { arbeit: string, semester: any }[];
   id: number;
-  bots: { name: string, image: any }[];
+  bots: { name: string, image: any, slug: string}[];
   currentSemester: boolean;
 }
 
-export default function MemberKachel({ id, image, taetigkeit, name, bots, fach, currentSemester }: Readonly<MemberData>) {
+export default function MemberKachel({ id, image, taetigkeit, name, bots,  fach, currentSemester }: Readonly<MemberData>) {
 
 
 
@@ -135,7 +135,7 @@ export default function MemberKachel({ id, image, taetigkeit, name, bots, fach, 
 
               {bots.map((bot) =>
 
-                <p className={styles.botsKachel} key={bot.name} >
+                <Link className={styles.botsKachel} key={bot.name} href={`/labor/${bot.slug}`}>
                   {image ? (<Image
                     src={`https://www.legolab-karlsruhe.de${bot.image.url}`}
                     width={400}
@@ -145,7 +145,7 @@ export default function MemberKachel({ id, image, taetigkeit, name, bots, fach, 
                   <span className={styles.botsName}>
                   {bot.name}
                   </span>
-                </p>
+                </Link>
 
               )
               }

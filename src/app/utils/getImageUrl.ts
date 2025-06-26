@@ -10,10 +10,6 @@ import { PlatzhalterMedia } from "../utils/interfaces/platzhalter_media.interfac
 
 
 
-
-
-
-
 export function getImageUrl(
   imageObj: ImageType | undefined,
   platzhalter?: PlatzhalterMedia
