@@ -38,7 +38,7 @@ export default async function MindstormSinglePage(props: { params: Params }) {
   })
 
   const strapiData: any = await fetchData("mindstorms?" + query)
-  const { name, image, date, description, legoSetNumber, interfaces, developerboard, bluetooth, infrared, codingTypes, bots } = strapiData.data[0] as Mindstorm;
+  const { name, image, date, longDescRTMD, legoSetNumber, interfaces, developerboard, bluetooth, infrared, codingTypes, bots } = strapiData.data[0] as Mindstorm;
   const sortedCodingTypes = codingTypes
   ? codingTypes
       .split(",")
@@ -85,7 +85,7 @@ export default async function MindstormSinglePage(props: { params: Params }) {
             <span className={["material-symbols-outlined", styles.icon].join(" ")}>code</span>
             <span className={styles.iconLabel}>{sortedCodingTypes}</span>
           </div>
-          <p>{description}</p>
+          <p>{longDescRTMD}</p>
         </div>
       </section>
       {bots && bots.length > 0 && (
