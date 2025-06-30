@@ -1,4 +1,7 @@
 import { fetchData } from "@/app/utils/api";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeSanitize from "rehype-sanitize";
 import qs from "qs"
 import styles from "./page.module.css"
 import Image from "next/image";
@@ -40,12 +43,12 @@ export default async function MindstormSinglePage(props: { params: Params }) {
   const strapiData: any = await fetchData("mindstorms?" + query)
   const { name, image, date, longDescRTMD, legoSetNumber, interfaces, developerboard, bluetooth, infrared, codingTypes, bots } = strapiData.data[0] as Mindstorm;
   const sortedCodingTypes = codingTypes
-  ? codingTypes
+    ? codingTypes
       .split(",")
       .map(item => item.trim())
       .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
       .join(", ")
-  : "";
+    : "";
 
   return (
     <section>
@@ -85,7 +88,13 @@ export default async function MindstormSinglePage(props: { params: Params }) {
             <span className={["material-symbols-outlined", styles.icon].join(" ")}>code</span>
             <span className={styles.iconLabel}>{sortedCodingTypes}</span>
           </div>
-          <p>{longDescRTMD}</p>
+          <div className={styles.markdown}>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeSanitize]}>
+              {longDescRTMD}
+            </ReactMarkdown>
+          </div>
+
         </div>
       </section>
       {bots && bots.length > 0 && (

@@ -2,10 +2,10 @@
 
 .material_symbols_outlined {
   font-variation-settings:
-  'FILL' 1,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
 }
 
 .title::after {
@@ -41,7 +41,7 @@
   color: var(--foreground);
   font-size: 1.25rem;
   align-items: center;
-  }
+}
 
 .iconItem {
   display: flex;
@@ -74,6 +74,26 @@
   padding: 32px;
 }
 
+.markdown {
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  margin-top: 1.5em;
+}
+
+.markdown ul {
+  list-style-type: disc;
+  margin-left: 1.5em;
+}
+
+.markdown a {
+  color: var(--primary);
+}
+
 .related_bots {
   width: 50%;
   margin: 64px auto 0 auto;
@@ -89,6 +109,4 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
-  
-}
+@media only screen and (max-width: 768px) {}
