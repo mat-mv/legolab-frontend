@@ -8,7 +8,7 @@
 .tabList {
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   column-gap: 8px;
   background-color: var(--area);
   padding: 8px;
