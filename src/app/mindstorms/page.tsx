@@ -1,7 +1,7 @@
 import qs from "qs";
 import { fetchData } from "@/app/utils/api";
 import { Mindstorm } from "@/app/utils/interfaces/mindstorm.interface";
-import MindstormsSlider from "@/app/components/slider/mindtorms_slider";
+import MindstormsSlider from "@/app/components/slider/mindstorms_slider";
 
 export default async function Mindstorms() {
   const query = qs.stringify({

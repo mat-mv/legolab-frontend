@@ -7,6 +7,7 @@ export interface Mindstorm {
   name: string,
   slug: string,
   interfaces: number,
+  shortDescription: string;
   shotDescRTMD: string,
   longDescRTMD: string,
   date: string,
