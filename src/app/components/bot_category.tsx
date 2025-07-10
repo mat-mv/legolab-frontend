@@ -6,7 +6,6 @@ import { Bot } from "../utils/interfaces/bot.interface"
 import styles from "./BotCategory.module.css"
 
 export default async function BotCategory(category: Category) {
-
   const query = qs.stringify({
     populate: {
       image: {
@@ -20,19 +19,20 @@ export default async function BotCategory(category: Category) {
         },
       },
     },
-  })
+    sort: ['codeDif:asc','buildDif:asc'],
+  }, { encodeValuesOnly: true });
 
-  const strapiData:any = await fetchData("bots?" + query)
-  const bots:Bot[] = strapiData.data
+  const strapiData: any = await fetchData("bots?" + query);
+  const bots: Bot[] = strapiData.data;
 
   if (bots.length === 0) {
     return null;
   }
 
-  return(
+  return (
     <section className={styles.container}>
-        <h3>{category.name}</h3>
-        <BotSlider bots={bots}/>
-      </section>
-  )
+      <h3>{category.name}</h3>
+      <BotSlider bots={bots} />
+    </section>
+  );
 }
