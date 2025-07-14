@@ -22,7 +22,7 @@ export default async function Home() {
   const query = qs.stringify({
     populate: {
       'heroImage': {
-        fields: ['url'],
+        fields: ['url', 'width', 'height'],
       },
       'ctaButtons': {
         fields: ['id', 'secondary', 'label', 'href']
@@ -41,6 +41,14 @@ export default async function Home() {
   const strapiData:any = await fetchData("home-page?" + query)
   const home:HomePage = strapiData.data
 
+// Berechne die Höhe im gleichen Seitenverhältnis von heroImage:
+const displayHeight = home.heroImage?.width && home.heroImage?.height
+  ? Math.round((400 / home.heroImage?.width) * home.heroImage?.height)
+  : undefined;
+
+
+
+
   return (
     <section>
       <section className={[styles.hero_section].join(" ")}>
@@ -54,7 +62,7 @@ export default async function Home() {
           </div>
         </div>
         <div>
-          <Image className={styles.img} src={`https://www.legolab-karlsruhe.de${home.heroImage.url}`} width={400} height={225} alt="Picture"></Image>
+          <Image className={styles.img} src={`https://www.legolab-karlsruhe.de${home.heroImage.url}`} width={400} height={displayHeight} alt="Picture"></Image>
         </div>
       </section>
       <section className={styles.slider}>
