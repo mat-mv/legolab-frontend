@@ -15,7 +15,7 @@ interface TeamPage {
 export default async function Team() {
 
 
-  //Bekomme das aktuelle Semeester
+  //Bekomme das aktuelle Semester
   const currentYear = new Date().getFullYear().toString();
   const month = new Date().getMonth() + 1;
   const currentSemester = month >= 4 && month <= 9 ? "SoSe" : "WiSe";
