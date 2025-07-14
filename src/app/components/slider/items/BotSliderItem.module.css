@@ -28,6 +28,7 @@
 
 .text_box:hover {
   color: var(--foreground);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
 .text_box:hover .title {
