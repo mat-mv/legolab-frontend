@@ -8,7 +8,7 @@ export default function LinksTabs({ links_per_chapter }: { links_per_chapter: Li
   return (
     <Tabs>
       <div className={styles.tabsHeader}>
-        <h2>Links je Kapitel</h2>
+        <h2>Links je Kapitel im Buch</h2>
         <TabList className={styles.tabList}>
           {links_per_chapter.map((links) => (
             <Tab key={links.id} className={styles.tab} selectedClassName={styles.selectedTab}>

@@ -9,6 +9,7 @@ import { getImageUrl } from "../utils/getImageUrl";
 interface TeamPage {
   title: string,
   description: string,
+  second_subtitle: string,
 }
 
 
@@ -121,10 +122,10 @@ export default async function Team() {
                 {/*Beschreibung*/}
                 <span className={styles.name}>{member.name}</span>
 
-                {member.name.includes("Uwe") && (
+                {member.name.includes("Uwe Haneke") && (
                   <span className={styles.profBeschreibung}>Gesamtleitung</span>
                 )}
-                {member.name.includes("Mruzek") && (
+                {member.name.includes("Matthias Mruzek-Vering") && (
                   <span className={styles.profBeschreibung}>Operative Leitung</span>
                 )}
               </div>
@@ -176,7 +177,7 @@ export default async function Team() {
 
       {/*---------Hier kommen alle Ehemaligen hin---------*/}
       <h3 className={styles.zweiteReihe}>
-        Auf die haben wir gebaut:
+        {teampage.second_subtitle}
       </h3>
 
 
