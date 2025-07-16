@@ -168,9 +168,8 @@
 
 .botsKachel {
   background: rgb(255, 255, 255);
-  
   border-radius: 8px;
-  width: 20%;
+  width: 100px;
   max-width: 800px;
   display: flex;
   flex-direction: column;
@@ -183,6 +182,24 @@
 
 .botsName {
   padding-left: 8px;
+  font-size: 0.8rem;
+  white-space: nowrap;           /* Kein Umbruch */
+  overflow: hidden;              /* Überlauf ausblenden */
+  text-overflow: ellipsis;       /* ... am Ende anzeigen */
+  max-width: 90px;               /* Passe die Breite ggf. an */
+  display: block;
+  position: relative;  
+}
+/*Fadeout bei Text overflow*/
+.botsName::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1em;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, white 80%);
 }
 
 
