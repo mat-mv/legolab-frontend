@@ -19,5 +19,6 @@ export interface Bot {
   buildHintDescription: string,
   buildInstructionHeader: string,
   buildInstructionDescription: string,
-  ctaButtons: ButtonInterface[];
+  ctaButtons: ButtonInterface[],
+  teammitglieds: any;
 }
