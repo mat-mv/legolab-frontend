@@ -1,12 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./BotSliderItem.module.css"
+import { Image as ImageInterface } from "@/app/utils/interfaces/image.interface";
 
 interface BotSliderItemProps {
   title: string;
   href: string;
   children: React.ReactElement;
-  image: string;
+  image: ImageInterface;
   build_difficulty: number;
   code_difficulty: number;
 }
@@ -37,7 +38,7 @@ export default function BotSliderItem({ title, href, children, image, build_diff
   return(
     <Link href={href} className={styles.text_box}>
       {image ? (
-        <Image src={`https://www.legolab-karlsruhe.de${image}`} width={400} height={225} alt="Image" className={styles.image}></Image>
+        <Image src={`https://www.legolab-karlsruhe.de${image.url}`} width={image.width} height={image.height} alt="Image" className={styles.image}></Image>
       ) : ("")}
       <div className={styles.content}>
       <h4 className={styles.title}>{title}</h4>

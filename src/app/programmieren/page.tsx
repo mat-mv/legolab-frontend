@@ -23,7 +23,7 @@ export default async function Programmieren() {
       'programme': {
         populate: {
           'icon' : {
-            fields: ['url'],
+            fields: ['url', 'width', 'height'],
           }
         },
         fields: ['id', 'title', 'body', 'href'],

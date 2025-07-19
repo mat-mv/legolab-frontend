@@ -27,7 +27,7 @@ export default async function Team() {
   const query = qs.stringify({
     populate: {
       image: {
-        fields: ['url'],
+        fields: ['url', 'width', 'height'],
       },
 
 
@@ -114,8 +114,8 @@ export default async function Team() {
                 <Image
                   src={getImageUrl(member.image, platzhalterAvatar)}
                   alt={member.name}
-                  width={128}
-                  height={128}
+                  width={member.image?.width}
+                  height={member.image?.height}
                   className={styles.profAvatar}
                   title={member.name}
                 />
