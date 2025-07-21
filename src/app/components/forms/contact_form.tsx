@@ -49,7 +49,7 @@ export default function ContactForm() {
                 </div>
                 <div className={styles.h_input_field}>
                     <label htmlFor="verify_email">E-Mail-Adresse bestätigen</label>
-                    <input type="text" id="verify_email" name="verify_email" defaultValue={""}/>
+                    <input type="text" id="verify_email" name="verify_email" value={""}/>
                 </div>
                 <button className="button" disabled={isPending}>Absenden</button>
             </form>
