@@ -7,7 +7,6 @@ export interface Mindstorm {
   name: string,
   slug: string,
   interfaces: number,
-  shotDescRTMD: string,
   longDescRTMD: string,
   date: string,
   bots: Bot[],
