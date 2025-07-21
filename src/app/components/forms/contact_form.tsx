@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { sendContactFormAction } from "@/app/utils/actions/contact-actions"
 import styles from "./ContactForm.module.css"
+import { Lavishly_Yours } from "next/font/google";
 
 const INITIAL_STATE = {
     data: null,
@@ -45,6 +46,10 @@ export default function ContactForm() {
                         </div>
                     )}
                     <textarea id="nachricht" name="nachricht" defaultValue={formState?.values?.nachricht} className={formState?.zodErrors?.nachricht && (styles.error)}></textarea>
+                </div>
+                <div className={styles.h_input_field}>
+                    <label htmlFor="verify_email">E-Mail-Adresse bestätigen</label>
+                    <input type="text" id="verify_email" name="verify_email" defaultValue={""}/>
                 </div>
                 <button className="button" disabled={isPending}>Absenden</button>
             </form>

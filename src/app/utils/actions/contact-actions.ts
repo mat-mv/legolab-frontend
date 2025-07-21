@@ -2,6 +2,7 @@
 
 import { z, ZodEffects } from "zod";
 import { postData } from "../api";
+import { verify } from "crypto";
 
 const schemaRegister = z.object({
     vorname: z.string().min(1, "Bitte gebe einen Vornamen ein."),
@@ -18,6 +19,17 @@ export async function sendContactFormAction(prevState: any, formData: FormData) 
         nachname: formData.get("nachname"),
         eMailAdresse: formData.get("eMailAdresse"),
         nachricht: formData.get("nachricht"),
+        verify_email: formData.get("verify_email"),
+    }
+
+    if (rawData.verify_email !== "") {
+        return {
+            ...prevState,
+            zodErrors: null,
+            strapiErrors: null,
+            message: "Absenden der Anfrage nicht möglich.",
+            values: rawData,
+        };
     }
 
     const validatedFields = schemaRegister.safeParse(rawData);
