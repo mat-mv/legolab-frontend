@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { sendContactFormAction } from "@/app/utils/actions/contact-actions"
 import styles from "./ContactForm.module.css"
 import { Lavishly_Yours } from "next/font/google";
@@ -25,18 +25,18 @@ export default function ContactForm() {
                                 {formState.zodErrors.vorname}
                             </div>
                         )}
-                        <input id="vorname" name="vorname" type="text" defaultValue={formState?.values?.vorname} className={formState?.zodErrors?.vorname && (styles.error)}></input>
+                        <input id="vorname" maxLength={256} placeholder="Max. 256 Zeichen" name="vorname" type="text" defaultValue={formState?.values?.vorname} className={formState?.zodErrors?.vorname && (styles.error)}></input>
                     </div>
                     <div className={styles.input_field}>
                         <label htmlFor="nachname" className={formState?.zodErrors?.nachname && (styles.error)}>Nachname</label>
                         {formState?.zodErrors?.nachname && <div className={[styles.error, styles.message].join(' ')}>{formState.zodErrors.nachname}</div>}
-                        <input id="nachname" name="nachname" type="text" defaultValue={formState?.values?.nachname} className={formState?.zodErrors?.nachname && (styles.error)}></input>
+                        <input id="nachname" maxLength={256} placeholder="Max. 256 Zeichen" name="nachname" type="text" defaultValue={formState?.values?.nachname} className={formState?.zodErrors?.nachname && (styles.error)}></input>
                     </div>
                 </div>
                 <div className={styles.input_field}>
                     <label htmlFor="email" className={formState?.zodErrors?.eMailAdresse && (styles.error)}>E-Mail-Adresse</label>
                     {formState?.zodErrors?.eMailAdresse && <div className={[styles.error, styles.message].join(' ')}>{formState.zodErrors.eMailAdresse[0]}</div>}
-                    <input id="email" name="eMailAdresse" type="text" defaultValue={formState?.values?.eMailAdresse} className={formState?.zodErrors?.eMailAdresse && (styles.error)}></input>
+                    <input id="email" maxLength={256} placeholder="Max. 256 Zeichen" name="eMailAdresse" type="text" defaultValue={formState?.values?.eMailAdresse} className={formState?.zodErrors?.eMailAdresse && (styles.error)}></input>
                 </div>
                 <div className={styles.input_field}>
                     <label htmlFor="nachricht" className={formState?.zodErrors?.nachricht && (styles.error)}>Nachricht</label>
@@ -45,11 +45,11 @@ export default function ContactForm() {
                             {formState.zodErrors.nachricht}
                         </div>
                     )}
-                    <textarea id="nachricht" name="nachricht" defaultValue={formState?.values?.nachricht} className={formState?.zodErrors?.nachricht && (styles.error)}></textarea>
+                    <textarea id="nachricht" maxLength={1000} placeholder="Max. 1000 Zeichen" name="nachricht" defaultValue={formState?.values?.nachricht} className={formState?.zodErrors?.nachricht && (styles.error)}></textarea>
                 </div>
                 <div className={styles.h_input_field}>
                     <label htmlFor="verify_email">E-Mail-Adresse bestätigen</label>
-                    <input type="text" id="verify_email" name="verify_email" value={""}/>
+                    <input type="text" maxLength={256} id="verify_email" name="verify_email" value={""}/>
                 </div>
                 <button className="button" disabled={isPending}>Absenden</button>
             </form>
