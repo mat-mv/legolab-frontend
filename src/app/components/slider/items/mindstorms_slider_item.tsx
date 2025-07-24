@@ -8,7 +8,7 @@ export default function MindstormsSliderItem({ date, name, image, slug }: Readon
   return (
     <Link href={slug} className={styles.text_box}>
       {image ? (
-        <Image src={`https://www.legolab-karlsruhe.de${image.url}`} width={400} height={400} alt="Image" className={styles.image} />
+        <Image src={`https://www.legolab-karlsruhe.de${image.url}`} width={image.width} height={image.height} alt="Image" className={styles.image} />
       ) : ("")}
       <div className={styles.content}>
         <h4 className={styles.title}>{name}</h4>

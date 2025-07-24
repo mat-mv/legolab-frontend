@@ -9,7 +9,7 @@ export default async function BotCategory(category: Category) {
   const query = qs.stringify({
     populate: {
       image: {
-        fields: ['url'],
+        fields: ['url', 'width', 'height'],
       },
     },
     filters: {

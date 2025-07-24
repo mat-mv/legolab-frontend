@@ -62,7 +62,7 @@ const displayHeight = home.heroImage?.width && home.heroImage?.height
           </div>
         </div>
         <div>
-          <Image className={styles.img} src={`https://www.legolab-karlsruhe.de${home.heroImage.url}`} width={400} height={displayHeight} alt="Picture"></Image>
+          <Image className={styles.img} src={`https://www.legolab-karlsruhe.de${home.heroImage.url}`} width={home.heroImage.width} height={home.heroImage.height} alt="Picture"></Image>
         </div>
       </section>
       <section className={styles.slider}>
