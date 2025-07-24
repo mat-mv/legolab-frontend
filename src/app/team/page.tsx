@@ -36,7 +36,7 @@ export default async function Team() {
       },
 
       bots: {
-      fields: ['name', 'slug'], // <--- hier beide Felder anfordern
+      fields: ['name', 'slug'],
       populate: {
         image: {
           fields: ['url'],

@@ -1,5 +1,6 @@
 import { fetchData } from "@/app/utils/api"
 import { Bot } from "@/app/utils/interfaces/bot.interface"
+import { BotSinglePage } from "@/app/utils/interfaces/bot_single_page.interface"
 import Button from "../../components/button";
 import qs from "qs"
 import styles from "./page.module.css"
@@ -52,6 +53,12 @@ export default async function LaborSinglePage(props: {params: Params}) {
   const strapiData: any = await fetchData("bots?" + query)
   const bot: Bot = strapiData.data[0]
 
+  const strapiData2: any = await fetchData("bot-single-page?")
+  const BotPage: BotSinglePage = strapiData2.data
+
+console.log("BotPage", BotPage);
+console.log("strapiData2", strapiData2);
+
   const build_icons = []
 
   for (let i = 0; i < 5; i++) {
@@ -73,6 +80,7 @@ export default async function LaborSinglePage(props: {params: Params}) {
   }
 
   return (
+    
     <section>
       {/*Erster Block mit allgemeinen Infos*/}
       <section className={styles.info_block}>
@@ -99,11 +107,16 @@ export default async function LaborSinglePage(props: {params: Params}) {
       </section>
 
       {/*Zweiter Block mit Baunanleitung etc*/}
+      <section className={styles.hint}>
+          <strong>{BotPage.BuildHintHeader}</strong>
+          {BotPage.BomHintHeaderDescription}
+      </section>
+
       <section className={styles.info_block}>
         <div>
           <div>
-            <h3>{bot.buildHeader}</h3>
-            {bot.buildDescription}
+            <h3>{BotPage.BomHintHeader}</h3>
+            {BotPage.BuildDescription}
           </div>
           <div className={styles.imageBOM}>
             {bot.bom ? (
@@ -117,7 +130,7 @@ export default async function LaborSinglePage(props: {params: Params}) {
           </div>
         </div>
         <div>
-          <h3>{bot.buildInstructionHeader}</h3>
+          <h3>{BotPage.BuildInstructionHeader}</h3>
           {bot.buildInstructionDescription}
         </div>
 
