@@ -5,10 +5,11 @@ import Button from "../../components/button";
 import qs from "qs"
 import styles from "./page.module.css"
 import Image from "next/image";
+import BotFocusKachel from "@/app/components/bot_focus_kachel"
 
 type Params = Promise<{ slug: string }>
 
-export default async function LaborSinglePage(props: {params: Params}) {
+export default async function LaborSinglePage(props: { params: Params }) {
   const params = await props.params;
 
   const query = qs.stringify({
@@ -56,8 +57,8 @@ export default async function LaborSinglePage(props: {params: Params}) {
   const strapiData2: any = await fetchData("bot-single-page?")
   const BotPage: BotSinglePage = strapiData2.data
 
-console.log("BotPage", BotPage);
-console.log("strapiData2", strapiData2);
+  console.log("BotPage", BotPage);
+  console.log("strapiData2", strapiData2);
 
   const build_icons = []
 
@@ -79,8 +80,10 @@ console.log("strapiData2", strapiData2);
     }
   }
 
+
+  console.log("teammitglieds", bot.teammitglieds);
   return (
-    
+
     <section>
       {/*Erster Block mit allgemeinen Infos*/}
       <section className={styles.info_block}>
@@ -89,13 +92,39 @@ console.log("strapiData2", strapiData2);
             <Image src={`https://www.legolab-karlsruhe.de${bot.image.url}`} width={400} height={225} alt="Image" className={styles.image}></Image>
           ) : ("")}
 
-          <div className={styles.build_icons}>
-            {build_icons}
-          </div>
-          <div className={styles.code_icons}>
-            {code_icons}
+
+          <div className={styles.botBildUnterleiste}>
+
+            <div>
+              <div className={styles.build_icons}>
+                {build_icons}
+              </div>
+              <div className={styles.code_icons}>
+                {code_icons}
+              </div>
+            </div>
+
+
+
+            {Array.isArray(bot.teammitglieds) && bot.teammitglieds.length > 0 && (
+              <div className={styles.teammember_box}>
+                {bot.teammitglieds?.[0]?.image?.url ? (
+                  <Image
+                    src={`https://www.legolab-karlsruhe.de${bot.teammitglieds?.[0]?.image?.url}`}
+                    width={80}
+                    height={20}
+                    alt="Image"
+                    style={{ height: "100%", width: "auto", objectFit: "cover" }}
+                  />
+                ) : ("")}
+                <p>{bot.teammitglieds[0]?.name}</p>
+              </div>
+            )}
+
           </div>
         </div>
+
+
 
         <div>
           <h1>{bot.name}</h1>
@@ -108,8 +137,8 @@ console.log("strapiData2", strapiData2);
 
       {/*Zweiter Block mit Baunanleitung etc*/}
       <section className={styles.hint}>
-          <strong>{BotPage.BuildHintHeader}</strong>
-          {BotPage.BomHintHeaderDescription}
+        <strong>{BotPage.BuildHintHeader}</strong>
+        {bot.buildHintDescription}
       </section>
 
       <section className={styles.info_block}>
@@ -131,7 +160,10 @@ console.log("strapiData2", strapiData2);
         </div>
         <div>
           <h3>{BotPage.BuildInstructionHeader}</h3>
-          {bot.buildInstructionDescription}
+          <BotFocusKachel
+            tip={bot.buildInstructionDescription}
+          />
+
         </div>
 
 
@@ -146,19 +178,7 @@ console.log("strapiData2", strapiData2);
       </div>
 
 
-      <div>
-        {/*Es wird noch kein Teammitglied angezeigt, auch wenn es welche gibt*/}
-        {Array.isArray(bot.teammitglieds?.data) && bot.teammitglieds.data.length > 0 && (
-          <div>
-            <h2>Teammitglieder</h2>
-            <ul>
-              {bot.teammitglieds.data.map((mitglied: { attributes: { name: string }, id: number }) => (
-                <li key={mitglied.id}>{mitglied.attributes.name}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+
 
 
     </section>
