@@ -58,7 +58,7 @@ export default function BotFocusKachel({ tip }: Readonly<bot_focus>) {
 
               {/*------Text------*/}
               <div className={styles.text}>
-
+                
                 <h3 className={styles.titel}>{tip}</h3>
 
               </div>

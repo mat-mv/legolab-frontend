@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@types/qs": "^6.9.18",
+    "brick-viewer": "^1.0.0",
     "material-symbols": "^0.28.1",
     "next": "^15.3.4",
     "qs": "^6.14.0",
