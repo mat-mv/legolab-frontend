@@ -10,11 +10,12 @@ import { Url } from "url";
 
 interface bot_focus {
   tip: string;
+  botName?: string;
   platzhalterAnleitung?: string;
   platzhalterBildUrl?: string;
 }
 
-export default function BotFocusKachel({ tip, platzhalterAnleitung, platzhalterBildUrl }: Readonly<bot_focus>) {
+export default function BotFocusKachel({ tip, platzhalterAnleitung, platzhalterBildUrl, botName }: Readonly<bot_focus>) {
 
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false); // State für das Overlay
@@ -37,7 +38,6 @@ export default function BotFocusKachel({ tip, platzhalterAnleitung, platzhalterB
 
 
         <span className={styles.pageText}>
-          {platzhalterAnleitung}
           {tip}
         </span>
       </div>
@@ -57,10 +57,14 @@ export default function BotFocusKachel({ tip, platzhalterAnleitung, platzhalterB
         >
 
           <div className={styles.overlayContent}>
-            <div className={styles.innerStructure}>
+            <div >
+              <div className={styles.title}>
+                {botName}
+              </div>
               <div className={styles.text}>
                 {platzhalterAnleitung}
               </div>
+
               {platzhalterBildUrl && (
                 <Image
                   src={platzhalterBildUrl}
