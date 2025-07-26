@@ -3,6 +3,7 @@ import BotCategory from "../components/bot_category";
 import styles from "./page.module.css";
 import { fetchData } from "../utils/api";
 import { Category } from "../utils/interfaces/category.interface";
+import BuchBanner from "../components/buch_banner";
 
 export default async function Buch() {
 
@@ -30,6 +31,7 @@ export default async function Buch() {
     
     return (
       <section>
+        <BuchBanner/>
         <h1>Das LEGO-Mindstorms-Handbuch: Spielend zur Informatik mit EV3-Robotern</h1>
         {categories.map((category) => (
           <BotCategory key={category.id} name={category.name} parent={undefined} subCategories={[]} id={0} ></BotCategory>

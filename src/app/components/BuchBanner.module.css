@@ -1,0 +1,45 @@
+.banner {
+    height: 128px;
+    background-color: var(--area);
+    display: flex;
+    flex-direction: row;
+    border-radius: var(--border-radius);
+    align-items: end;
+    margin-bottom: 128px;
+    gap: 32px;
+    animation: intro 1s ease-in-out 1;
+    overflow: hidden;
+}
+
+.image {
+    width: auto;
+    height: 128px;
+}
+
+.content {
+    flex: 1;
+    align-self: center;
+}
+
+.content p:first-child {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.content p {
+    margin: 0;
+}
+
+.ctaButton {
+    padding: 32px;
+}
+
+@keyframes intro {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 128px;
+    }
+}
