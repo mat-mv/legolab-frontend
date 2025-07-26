@@ -1,6 +1,7 @@
 import { fetchData } from "@/app/utils/api"
 import { Bot } from "@/app/utils/interfaces/bot.interface"
 import { BotSinglePage } from "@/app/utils/interfaces/bot_single_page.interface"
+import { PlatzhalterMedia } from "@/app/utils/interfaces/platzhalter_media.interface";
 import Button from "../../components/button";
 import qs from "qs"
 import styles from "./page.module.css"
@@ -31,6 +32,9 @@ export default async function LaborSinglePage(props: { params: Params }) {
           },
         }
       },
+      category:{
+        fields: ['name']
+      }
     },
     filters: {
       slug: {
@@ -47,6 +51,15 @@ export default async function LaborSinglePage(props: { params: Params }) {
 
   })
 
+  const query2 = qs.stringify({
+    populate: {
+      fields: ['textcontent'],
+      bild: {
+        fields: ['url'],
+      },
+    }
+  })
+
 
 
 
@@ -57,8 +70,12 @@ export default async function LaborSinglePage(props: { params: Params }) {
   const strapiData2: any = await fetchData("bot-single-page?")
   const BotPage: BotSinglePage = strapiData2.data
 
-  console.log("BotPage", BotPage);
-  console.log("strapiData2", strapiData2);
+  const strapiData3: any = await fetchData("platzhalter-medias?" + query2)
+  const platzhalters: PlatzhalterMedia[] = strapiData3.data
+  const platzhalterAnleitung = platzhalters.find(
+    (p) => p.name === "BotInstructions"
+  );
+
 
   const build_icons = []
 
@@ -82,6 +99,7 @@ export default async function LaborSinglePage(props: { params: Params }) {
 
 
   console.log("teammitglieds", bot.teammitglieds);
+  console.log("category", bot.category)
   return (
 
     <section>
@@ -130,42 +148,54 @@ export default async function LaborSinglePage(props: { params: Params }) {
           <h1>{bot.name}</h1>
           <div className={styles.content}>
             {bot.description}
+            {bot.category?.name}
           </div>
         </div>
 
       </section>
 
       {/*Zweiter Block mit Baunanleitung etc*/}
-      <section className={styles.hint}>
-        <strong>{BotPage.BuildHintHeader}</strong>
-        {bot.buildHintDescription}
-      </section>
+
+      {/*Wenn es einen Tip gibt, wird dieser hier angezeigt*/}
+      {bot.buildHintDescription && bot.buildHintDescription.trim() !== "" && (
+        <section className={styles.hint}>
+          <strong>{BotPage.BuildHintHeader}</strong>
+          {bot.buildHintDescription}
+        </section>
+      )}
 
       <section className={styles.info_block}>
-        <div>
+        {/*Wenn es eine Bom gibt, wird diese hier angezeigt*/}
+        {bot.bom && bot.bom.url !== "" && (
           <div>
-            <h3>{BotPage.BomHintHeader}</h3>
-            {BotPage.BuildDescription}
+            <div>
+              <h3>{BotPage.BomHintHeader}</h3>
+              {BotPage.BuildDescription}
+            </div>
+            <div className={styles.imageBOM}>
+              {bot.bom ? (
+                <Image
+                  src={`https://www.legolab-karlsruhe.de${bot.bom.url}`}
+                  alt={`${bot.name} BOM`}
+                  fill
+                  style={{ objectFit: "contain" }}
+                />
+              ) : ("Fehler: BOM ist nicht verfügbar oder konnte nicht geladen werden.")}
+            </div>
           </div>
-          <div className={styles.imageBOM}>
-            {bot.bom ? (
-              <Image
-                src={`https://www.legolab-karlsruhe.de${bot.bom.url}`}
-                alt={`${bot.name} BOM`}
-                fill
-                style={{ objectFit: "contain" }}
-              />
-            ) : ("Fehler: BOM ist nicht verfügbar oder konnte nicht geladen werden.")}
+        )}
+        {/*Wenn es eine Anleitung gibt, wird diese hier angezeigt*/}
+        {bot.buildInstructionDescription && bot.buildInstructionDescription.trim() !== "" && (
+          <div>
+            <h3>{BotPage.BuildInstructionHeader}</h3>
+            
+            <BotFocusKachel
+              tip={bot.buildInstructionDescription}
+              platzhalterAnleitung={platzhalterAnleitung?.textcontent}
+              platzhalterBildUrl={platzhalterAnleitung?.bild?.url ? `https://www.legolab-karlsruhe.de${platzhalterAnleitung.bild.url}` : undefined}
+            />
           </div>
-        </div>
-        <div>
-          <h3>{BotPage.BuildInstructionHeader}</h3>
-          <BotFocusKachel
-            tip={bot.buildInstructionDescription}
-          />
-
-        </div>
-
+        )}
 
 
       </section>

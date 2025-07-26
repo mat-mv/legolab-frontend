@@ -61,10 +61,7 @@
 }
 
 .overlayContent .innerStructure {
-  display: flex; /* Bild und Text nebeneinander */
-  flex-direction: row; /* Horizontal ausgerichtet */
   gap: 8px; /* Abstand zwischen Bild und Text */
-  align-items: flex-start; /* Bild und Text oben ausrichten */
 }
 
 .overlayContent .image {
