@@ -2,6 +2,7 @@ import qs from "qs";
 import { fetchData } from "@/app/utils/api";
 import { LinksPerChapter } from "@/app/utils/interfaces/links_per_chapter";
 import LinksTabs from "@/app/components/tabs/links_tabs";
+import styles from "./page.module.css";
 
 
 
@@ -20,7 +21,7 @@ export default async function LinksPage() {
   const links_per_chapter: LinksPerChapter[] = strapiData.data;
 
   return (
-    <section>
+    <section className={styles.links}>
       <LinksTabs links_per_chapter={links_per_chapter} />
     </section>
   )
