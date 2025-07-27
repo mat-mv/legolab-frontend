@@ -1,14 +1,20 @@
 .banner {
-    height: 128px;
+    height: auto;
     background-color: var(--area);
     display: flex;
     flex-direction: row;
     border-radius: var(--border-radius);
-    align-items: end;
     margin-bottom: 128px;
-    gap: 32px;
     animation: intro 1s ease-in-out 1;
     overflow: hidden;
+}
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 32px;
 }
 
 .image {
@@ -16,10 +22,6 @@
     height: 128px;
 }
 
-.content {
-    flex: 1;
-    align-self: center;
-}
 
 .content p:first-child {
     font-weight: 600;
@@ -31,15 +33,32 @@
 }
 
 .ctaButton {
-    padding: 32px;
+    align-self: flex-end;
 }
 
 @keyframes intro {
     from {
-        height: 0;
+        max-height: 0;
     }
 
     to {
-        height: 128px;
+        max-height: 100vh;
+    }
+}
+
+@media only screen and (max-width: 768px) { 
+    .wrapper {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .image {
+        height: 192px;
+        width: auto;
+        align-self: center;
+    }
+    .ctaButton {
+        padding: 0;
+        align-self: flex-end;
     }
 }
