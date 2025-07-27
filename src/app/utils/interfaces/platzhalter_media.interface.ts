@@ -4,4 +4,5 @@ export interface PlatzhalterMedia {
   id: number,
   name: string,
   bild: Media,
+  textcontent: string,
 }

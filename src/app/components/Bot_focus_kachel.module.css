@@ -60,12 +60,7 @@
   gap: 32px; /* Abstand zwischen den Abschnitten */
 }
 
-.overlayContent .innerStructure {
-  display: flex; /* Bild und Text nebeneinander */
-  flex-direction: row; /* Horizontal ausgerichtet */
-  gap: 8px; /* Abstand zwischen Bild und Text */
-  align-items: flex-start; /* Bild und Text oben ausrichten */
-}
+
 
 .overlayContent .image {
   flex-shrink: 0; /* Verhindert, dass das Bild verkleinert wird */
@@ -82,10 +77,12 @@
   margin: 32px;
 }
 
-.overlayContent .titel {
+.overlayContent .title {
   flex-direction: column; /* Text wird vertikal gestapelt */
   justify-content: flex-start; /* Inhalte oben ausrichten */
-  margin-bottom: 32px;
+  margin: 32px;
+  font-size: 2.25rem;
+  line-height: 2.75rem;
 }
 
 
