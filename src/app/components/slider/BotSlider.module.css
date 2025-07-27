@@ -1,5 +1,6 @@
 .slider_container {
   position: relative;
+  overflow: visible
 }
 
 .prev_button, .next_button {
