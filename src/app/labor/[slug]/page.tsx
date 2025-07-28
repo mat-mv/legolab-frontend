@@ -42,7 +42,7 @@ export default async function LaborSinglePage(props: { params: Params }) {
         }
       },
       category: {
-        fields: ['name'], 
+        fields: ['name'],
         populate: {
           parent: {
             fields: ['name'],
@@ -154,23 +154,23 @@ export default async function LaborSinglePage(props: { params: Params }) {
             {/*Wenn der Bot ein Teammitglied hat, zeige es an (im Moment nur das erste eingetragene)*/}
             {Array.isArray(bot.teammitglieds) && bot.teammitglieds.length > 0 && (
               <Link href="/team">
-              <div className={styles.teammember_box}>
-                {bot.teammitglieds?.[0]?.image?.url ? (
-                  <Image
-                    src={`https://www.legolab-karlsruhe.de${bot.teammitglieds?.[0]?.image?.url}`}
-                    width={80}
-                    height={20}
-                    alt="Image"
-                    style={{ height: "100%", width: "auto", objectFit: "cover" }}
-                  />
-                ) : ("")}
-                <p>{bot.teammitglieds[0]?.name}</p>
-              </div>
+                <div className={styles.teammember_box}>
+                  {bot.teammitglieds?.[0]?.image?.url ? (
+                    <Image
+                      src={`https://www.legolab-karlsruhe.de${bot.teammitglieds?.[0]?.image?.url}`}
+                      width={80}
+                      height={20}
+                      alt="Image"
+                      style={{ height: "100%", width: "auto", objectFit: "cover" }}
+                    />
+                  ) : ("")}
+                  <p>{bot.teammitglieds[0]?.name}</p>
+                </div>
               </Link>
             )}
 
             {/*Wenn die Parend-Categorie vom Bot "Buch" hat, gebe das Buch als Author an*/}
-            { bot.category.parent?.name.trim() == "Buch" && (
+            {bot.category.parent?.name.trim() == "Buch" && (
               <div className={styles.teammember_box}>
                 {banner?.image?.url ? (
                   <Image
@@ -232,13 +232,18 @@ export default async function LaborSinglePage(props: { params: Params }) {
         {bot.buildInstructionDescription && bot.buildInstructionDescription.trim() !== "" && (
           <div>
             <h3>{BotPage.BuildInstructionHeader}</h3>
+            <div>
+              {platzhalterAnleitung?.textcontent}
+            </div>
 
+            {/*Sobald die .mpd Integration funktioniert, soll die Bauanleitung hier erscheinen
             <BotFocusKachel
               tip={bot.buildInstructionDescription}
               platzhalterAnleitung={platzhalterAnleitung?.textcontent}
               platzhalterBildUrl={platzhalterAnleitung?.bild?.url ? `https://www.legolab-karlsruhe.de${platzhalterAnleitung.bild.url}` : undefined}
               botName={bot.name}
             />
+            */}
           </div>
         )}
 
