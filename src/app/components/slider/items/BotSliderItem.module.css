@@ -24,9 +24,7 @@
   background-color: var(--area);
   border-radius: 8px;
   display: block;
-  
   transition: background-color 100ms ease-in, box-shadow 0.2s, transform 0.2s;
-
 }
 
 .text_box:hover {

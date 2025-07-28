@@ -8,6 +8,7 @@ import qs from "qs"
 import styles from "./page.module.css"
 import Image from "next/image";
 import BotFocusKachel from "@/app/components/bot_focus_kachel"
+import Link from "next/link";
 
 type Params = Promise<{ slug: string }>
 
@@ -41,7 +42,12 @@ export default async function LaborSinglePage(props: { params: Params }) {
         }
       },
       category: {
-        fields: ['name']
+        fields: ['name'], 
+        populate: {
+          parent: {
+            fields: ['name'],
+          }
+        }
       }
     },
     filters: {
@@ -147,6 +153,7 @@ export default async function LaborSinglePage(props: { params: Params }) {
 
             {/*Wenn der Bot ein Teammitglied hat, zeige es an (im Moment nur das erste eingetragene)*/}
             {Array.isArray(bot.teammitglieds) && bot.teammitglieds.length > 0 && (
+              <Link href="/team">
               <div className={styles.teammember_box}>
                 {bot.teammitglieds?.[0]?.image?.url ? (
                   <Image
@@ -159,10 +166,11 @@ export default async function LaborSinglePage(props: { params: Params }) {
                 ) : ("")}
                 <p>{bot.teammitglieds[0]?.name}</p>
               </div>
+              </Link>
             )}
 
-            {/*Wenn die Categorie vom Bot "Labor" hat, gebe das Buch als Author an*/}
-            { bot.category.name.trim() == "Labor" && (
+            {/*Wenn die Parend-Categorie vom Bot "Buch" hat, gebe das Buch als Author an*/}
+            { bot.category.parent?.name.trim() == "Buch" && (
               <div className={styles.teammember_box}>
                 {banner?.image?.url ? (
                   <Image

@@ -1,6 +1,10 @@
 .slider_container {
   position: relative;
-  overflow: visible
+  overflow: visible;
+}
+
+.swiper {
+  overflow: visible;
 }
 
 .prev_button, .next_button {

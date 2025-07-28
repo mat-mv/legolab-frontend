@@ -73,15 +73,21 @@
 .teammember_box {
   padding-right: 16px;
   border-radius: 16px;
-  border: 1px solid var(--primary);
-  background-color: var(--background);
+  background-color: var(--area);
   gap: 8px;
   transition: background-color ease-in 100ms;
   display: flex;
   flex-direction: row;
   align-items: stretch; /* Bild und Text gleich hoch */
   height: 60px; /* Beispielhöhe, passe nach Bedarf an */
+  transition: background-color 100ms ease-in, box-shadow 0.2s, transform 0.2s;
 }
+
+.teammember_box:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
 
 .teammember_box img {
   height: 100%;
