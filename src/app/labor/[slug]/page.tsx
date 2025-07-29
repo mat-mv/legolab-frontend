@@ -9,6 +9,7 @@ import styles from "./page.module.css"
 import Image from "next/image";
 import BotFocusKachel from "@/app/components/bot_focus_kachel"
 import Link from "next/link";
+import { Button as ButtonInterface } from "@/app/utils/interfaces/button.interface";
 
 type Params = Promise<{ slug: string }>
 
@@ -16,6 +17,7 @@ interface Banner {
   title: string,
   subTitle: string,
   image: ImageInterface,
+  ctaButton: ButtonInterface,
 }
 
 
@@ -125,7 +127,7 @@ export default async function LaborSinglePage(props: { params: Params }) {
     }
   }
 
-
+  console.log("banner URL", banner.ctaButton.href);
   console.log("teammitglieds", bot.teammitglieds);
   console.log("category", bot.category)
   return (
@@ -141,49 +143,48 @@ export default async function LaborSinglePage(props: { params: Params }) {
 
           <div className={styles.botBildUnterleiste}>
 
-            <div>
-              <div className={styles.build_icons}>
-                {build_icons}
-              </div>
-              <div className={styles.code_icons}>
-                {code_icons}
-              </div>
-            </div>
 
 
-            {/*Wenn der Bot ein Teammitglied hat, zeige es an (im Moment nur das erste eingetragene)*/}
-            {Array.isArray(bot.teammitglieds) && bot.teammitglieds.length > 0 && (
-              <Link href="/team">
+            {/*Wenn die Parend-Categorie vom Bot "Buch" hat, gebe das Buch als Author an*/}
+            {bot.category.parent?.name.trim() == "Buch" && (
+              <Link href={banner.ctaButton.href}>
                 <div className={styles.teammember_box}>
-                  {bot.teammitglieds?.[0]?.image?.url ? (
+
+                  {banner?.image?.url ? (
                     <Image
-                      src={`https://www.legolab-karlsruhe.de${bot.teammitglieds?.[0]?.image?.url}`}
+                      src={`https://www.legolab-karlsruhe.de${banner?.image?.url}`}
                       width={80}
                       height={20}
                       alt="Image"
                       style={{ height: "100%", width: "auto", objectFit: "cover" }}
                     />
                   ) : ("")}
-                  <p>{bot.teammitglieds[0]?.name}</p>
+
+                  <p>{banner?.title}</p>
                 </div>
               </Link>
             )}
 
-            {/*Wenn die Parend-Categorie vom Bot "Buch" hat, gebe das Buch als Author an*/}
-            {bot.category.parent?.name.trim() == "Buch" && (
-              <div className={styles.teammember_box}>
-                {banner?.image?.url ? (
-                  <Image
-                    src={`https://www.legolab-karlsruhe.de${banner?.image?.url}`}
-                    width={80}
-                    height={20}
-                    alt="Image"
-                    style={{ height: "100%", width: "auto", objectFit: "cover" }}
-                  />
-                ) : ("")}
-                <p>{banner?.title}</p>
-              </div>
+            {/*Wenn der Bot ein Teammitglied hat, zeige es an (im Moment nur das erste eingetragene)*/}
+            {Array.isArray(bot.teammitglieds) && bot.teammitglieds.length > 0 && (
+              bot.teammitglieds.map((mitglied: { name: string; image?: { url?: string } }, idx: number) => (
+                <Link href="/team" key={idx}>
+                  <div className={styles.teammember_box}>
+                    {mitglied.image?.url ? (
+                      <Image
+                        src={`https://www.legolab-karlsruhe.de${mitglied.image.url}`}
+                        width={80}
+                        height={20}
+                        alt="Image"
+                        style={{ height: "100%", width: "auto", objectFit: "cover" }}
+                      />
+                    ) : ("")}
+                    <p>{mitglied.name}</p>
+                  </div>
+                </Link>
+              ))
             )}
+
           </div>
         </div>
 
@@ -191,6 +192,16 @@ export default async function LaborSinglePage(props: { params: Params }) {
 
         <div>
           <h1>{bot.name}</h1>
+
+          <div>
+            <div className={styles.build_icons}>
+              {build_icons}
+            </div>
+            <div className={styles.code_icons}>
+              {code_icons}
+            </div>
+          </div>
+
           <div className={styles.content}>
             {bot.description}
           </div>
@@ -256,10 +267,6 @@ export default async function LaborSinglePage(props: { params: Params }) {
           </Button>
         ))}
       </div>
-
-
-
-
 
     </section>
   )

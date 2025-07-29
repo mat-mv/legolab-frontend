@@ -99,19 +99,19 @@
 .botBildUnterleiste {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 
 .content {
-  padding: 16px;
+  margin-top: 16px;
 }
 
 .build_icons {
   display: flex;
   column-gap: 8px;
-  margin-top: 12px;
 }
 
 .code_icons {
@@ -122,6 +122,12 @@
 .icon {
   color: var(--primary)
 }
+
+.ctas {
+  display: flex;
+  gap: 16px;
+}
+
 
 .inactive {
   color: var(--foreground);
