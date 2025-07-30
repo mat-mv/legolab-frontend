@@ -1,0 +1,23 @@
+name: CI/CD Workflow to Nginx
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          git-cmd: true
+
+      - name: Run deployment script
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@193.196.36.158 "cd /var/www/legolab-karlsruhe.de/dev && git pull origin dev && npm install && npm run build && pm2 restart nextjs-app"
