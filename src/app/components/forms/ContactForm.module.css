@@ -18,13 +18,20 @@
     height: 10rem;
 }
 
-label.error {
+.message {
+    font-size: 1.5rem;
+}
+
+.error {
     color: var(--primary);
 }
 
-.message.error {
-    color: var(--primary);
+.error_message.error {
     font-size: 0.9rem;
+}
+
+.success {
+    color: var(--success);
 }
 
 input.error, textarea.error {

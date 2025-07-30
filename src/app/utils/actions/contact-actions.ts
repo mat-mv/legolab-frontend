@@ -29,6 +29,7 @@ export async function sendContactFormAction(prevState: any, formData: FormData) 
             zodErrors: null,
             strapiErrors: null,
             message: "Absenden der Anfrage nicht möglich.",
+            success: false,
             values: rawData,
         };
     }
@@ -41,6 +42,7 @@ export async function sendContactFormAction(prevState: any, formData: FormData) 
             zodErrors: validatedFields.error.flatten().fieldErrors,
             strapiErrors: null,
             message: "Fehlende Angaben. Bitte fülle alle Felder aus.",
+            success: false,
             values: rawData,
         }
     }
@@ -53,6 +55,7 @@ export async function sendContactFormAction(prevState: any, formData: FormData) 
             strapiErrors: null,
             zodErrors: null,
             message: "Ops! Something went wrong. Please try again.",
+            success: false,
             values: rawData,
         };
     }
@@ -64,6 +67,7 @@ export async function sendContactFormAction(prevState: any, formData: FormData) 
             strapiErrors: responseData.error,
             zodErrors: null,
             message: "Failed to send message.",
+            success: false,
             values: rawData,
         };
     }
@@ -73,6 +77,7 @@ export async function sendContactFormAction(prevState: any, formData: FormData) 
         zodErrors: null,
         strapiErrors: null,
         message: "Vielen Dank für deine Nachricht!",
+        success: true,
         values: rawData,
     };
 }
