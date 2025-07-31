@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Button from "./components/button";
 import TextBox from "./components/text_box"
+import ConfettiButton from "./components/confettiButton";
 import { fetchData } from "./utils/api";
 import { Image as ImageInterface } from "./utils/interfaces/image.interface";
 import { Button as ButtonInterface } from "./utils/interfaces/button.interface";
@@ -29,7 +30,7 @@ export default async function Home() {
       },
       'textBoxes': {
         populate: {
-          'icon' : {
+          'icon': {
             fields: ['url'],
           }
         },
@@ -38,19 +39,24 @@ export default async function Home() {
     },
   })
 
-  const strapiData:any = await fetchData("home-page?" + query)
-  const home:HomePage = strapiData.data
+  const strapiData: any = await fetchData("home-page?" + query)
+  const home: HomePage = strapiData.data
 
-// Berechne die Höhe im gleichen Seitenverhältnis von heroImage:
-const displayHeight = home.heroImage?.width && home.heroImage?.height
-  ? Math.round((400 / home.heroImage?.width) * home.heroImage?.height)
-  : undefined;
+  // Berechne die Höhe im gleichen Seitenverhältnis von heroImage:
+  const displayHeight = home.heroImage?.width && home.heroImage?.height
+    ? Math.round((400 / home.heroImage?.width) * home.heroImage?.height)
+    : undefined;
 
 
 
 
   return (
     <section>
+      <section className={styles.announcement}>
+        <div>
+          <ConfettiButton />
+        </div>
+      </section>
       <section className={[styles.hero_section].join(" ")}>
         <div>
           <h1>{home.header}</h1>
