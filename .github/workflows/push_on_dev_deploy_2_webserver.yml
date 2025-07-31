@@ -1,4 +1,4 @@
-name: CI/CD Workflow to Nginx
+name: CI/CD Workflow to Nginx for branch dev
 
 on:
   push:
