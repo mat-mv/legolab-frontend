@@ -1,0 +1,144 @@
+@import "material-symbols";
+
+
+
+.info_block {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.info_block > * {
+  width: 100%;
+}
+
+  @media (min-width: 768px) {
+  .info_block {
+    flex-direction: row;
+  }
+  .info_block > * {
+    width: 50%;
+  }
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 16px;
+  border-radius: 16px;
+}
+
+.imageBOM {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  flex: 1 1 0%;
+}
+
+
+
+.material_symbols_outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.title::after {
+  content: " ›";
+}
+
+.text_box {
+  background-color: var(--area);
+  border-radius: 8px;
+  display: block;
+}
+
+.text_box:hover {
+  color: var(--foreground);
+}
+
+.text_box:hover .title {
+  color: var(--primary);
+  transition: color ease-in 100ms;
+}
+
+
+
+.teammember_box {
+  padding-right: 16px;
+  border-radius: 16px;
+  background-color: var(--area);
+  gap: 8px;
+  transition: background-color ease-in 100ms;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch; /* Bild und Text gleich hoch */
+  height: 60px; /* Beispielhöhe, passe nach Bedarf an */
+  transition: background-color 100ms ease-in, box-shadow 0.2s, transform 0.2s;
+}
+
+.teammember_box:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+
+.teammember_box img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  border-radius: 16px 4px 4px 16px;
+}
+
+.botBildUnterleiste {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+
+.content {
+  margin-top: 16px;
+}
+
+.build_icons {
+  display: flex;
+  column-gap: 8px;
+}
+
+.code_icons {
+  display: flex;
+  column-gap: 8px;
+}
+
+.icon {
+  color: var(--primary)
+}
+
+.ctas {
+  display: flex;
+  gap: 16px;
+}
+
+
+.inactive {
+  color: var(--foreground);
+  opacity: 25%;
+}
+
+.hint {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 8px;
+  margin-top: 32px;
+}
+
+
