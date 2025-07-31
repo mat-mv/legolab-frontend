@@ -17,9 +17,10 @@ interface MemberData {
   id: number;
   bots: { name: string, image: any, slug: string}[];
   currentSemester: boolean;
+  semesterString?: string;
 }
 
-export default function MemberKachel({ id, image, taetigkeit, name, bots,  fach, currentSemester }: Readonly<MemberData>) {
+export default function MemberKachel({ id, image, taetigkeit, name, bots,  fach, currentSemester, semesterString }: Readonly<MemberData>) {
 
 
 
@@ -38,27 +39,22 @@ export default function MemberKachel({ id, image, taetigkeit, name, bots,  fach,
   return (
     <>
       {/* Kacheln */}
-
       <div className={styles.item_box} key={id} onClick={handleOpenOverlay}>
         {image ? (<Image src={image} width={400} height={225} alt="Image" className={styles.image}></Image>) : ("")}
 
 
 
         <span className={styles.textKachelLinksOben}>{name}
-          {/* ACHTUNG: CHECKT NUR DEN LETZTEN EINTRAG! 
-              SOLLTE MAN NOCH FIXEN, 
-              FALLS DER LETZTE EINTRAG EIN NACHTRAG FÜR ÄLTERES SEMESTER IST ODER SO */}
-          {/* Arbeit aus dem letzten Eintrag, falls aktuelles Semester */}
-          {Array.isArray(taetigkeit) && currentSemester == true && taetigkeit.length > 0 && (
-            <span className={styles.textKachelRechtsOben}>{taetigkeit[taetigkeit.length - 1].arbeit}</span>
+          {/* Wenn Aktuelles Semester, Zeige die Tätigkeit, die zum aktuellen Semester passt */}
+          {Array.isArray(taetigkeit) && currentSemester === true && taetigkeit.length > 0 && semesterString && (
+            <span className={styles.textKachelRechtsOben}>
+              {taetigkeit.find(t => t.semester === semesterString)?.arbeit}
+            </span>
           )}
-
         </span>
 
 
         <span className={styles.textKachelLinksUnten}>
-
-
           {/* Semester aus letztem Eintrag, falls nicht aktuelles Semester */}
           {Array.isArray(taetigkeit) && currentSemester == false && taetigkeit.length > 0 && (
             <span>{taetigkeit[taetigkeit.length - 1].semester}</span>
@@ -67,12 +63,8 @@ export default function MemberKachel({ id, image, taetigkeit, name, bots,  fach,
             <span>{" "}</span>
           )}
 
-
-
           <span className={styles.textKachelRechtsUnten}>{fach}</span>
         </span>
-
-
       </div>
 
 
@@ -104,11 +96,6 @@ export default function MemberKachel({ id, image, taetigkeit, name, bots,  fach,
               {/*------Text------*/}
               <div className={styles.text}>
 
-                {/*------X-Button brauchts sicher nicht-------
-                <button className={styles.closeButton} onClick={handleCloseOverlay}>
-                  X
-                </button>
-                */}
 
                 <h3 className={styles.titel}>{name}</h3>
                 <p>Studiengang: {fach}</p>

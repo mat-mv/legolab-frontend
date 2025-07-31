@@ -36,20 +36,20 @@ export default async function Team() {
       },
 
       bots: {
-      fields: ['name', 'slug'],
-      populate: {
-        image: {
-          fields: ['url'],
-        },
-        category: {
-          populate: {
-            parent: {
-              fields: ['name']
+        fields: ['name', 'slug'],
+        populate: {
+          image: {
+            fields: ['url'],
+          },
+          category: {
+            populate: {
+              parent: {
+                fields: ['name']
+              }
             }
           }
         }
       }
-    }
 
     },
   })
@@ -87,7 +87,30 @@ export default async function Team() {
     member.taetigkeit.some(t => t.arbeit !== "Leitung")
   );
 
+  //Mache eine Liste an ehemaligen Mitgliedern
+  const ehemalige = members
+    .filter(member =>
+      !Array.isArray(member.taetigkeit) ||
+      !member.taetigkeit.some(t => t.semester === semesterString) &&
+      member.taetigkeit.some(t => t.arbeit !== "Leitung")
+    );
 
+  //Sortiere die ehemaligen Mitglieder nach dem letzten Semester
+  const sortierteEhemalige = ehemalige.sort((a, b) => {
+    function getLatestSemester(taetigkeit: any[]) {
+      if (!Array.isArray(taetigkeit)) return -Infinity;
+      const semesters = taetigkeit
+        .filter(t => typeof t.semester === "string")
+        .map(t => {
+          const match = t.semester.match(/(WiSe|SoSe)(\d{4})/);
+          if (!match) return -Infinity;
+          return parseInt(match[2], 10) * 2 + (match[1] === "WiSe" ? 1 : 0);
+        });
+      return semesters.length ? Math.max(...semesters) : -Infinity;
+    }
+    // Reihenfolge umdrehen: b - a
+    return getLatestSemester(b.taetigkeit) - getLatestSemester(a.taetigkeit);
+  });
 
 
   return (
@@ -132,8 +155,6 @@ export default async function Team() {
             ))}
         </div>
 
-
-
       </section>
 
 
@@ -148,15 +169,8 @@ export default async function Team() {
           {/*Erste Unterüberschrift*/}
           <h3>{teampage.description}</h3>
 
-          {/*Filtert alle Mitglieder, die dieses Semester haben und keine Profs sind*/}
           <section className={styles.box_section}>
-            {members.filter(member =>
-              Array.isArray(member.taetigkeit) &&
-              member.taetigkeit.some(t => t.semester === semesterString)
-              &&
-              member.taetigkeit.some(t => t.arbeit !== "Leitung")
-            )
-              .map((member) => (
+            {aktuelleMitglieder.map((member) => (
                 <div className={styles.item_box} key={member.id}>
 
 
@@ -167,6 +181,7 @@ export default async function Team() {
                     name={member.name}
                     bots={member.bots} fach={member.fach}
                     currentSemester={true}
+                    semesterString={semesterString}
                   />
 
                 </div>
@@ -184,30 +199,19 @@ export default async function Team() {
       <section className={styles.box_section}>
 
 
-        {members.filter(member =>
-          !Array.isArray(member.taetigkeit) ||
-          !member.taetigkeit.some(t => t.semester === semesterString)
-          &&
-          member.taetigkeit.some(t => t.arbeit !== "Leitung")
-        )
-          .map((member) => {
-
-            return (
-              <div className={styles.item_box} key={member.id}>
-                <MemberKachel
-                  id={member.id}
-
-                  image={getImageUrl(member.image, platzhalterAvatar)}
-                  taetigkeit={member.taetigkeit}
-                  name={member.name}
-                  bots={member.bots}
-                  fach={member.fach}
-                  currentSemester={false}
-                />
-
-              </div>
-            );
-          })}
+        {sortierteEhemalige.map((member) => (
+          <div className={styles.item_box} key={member.id}>
+            <MemberKachel
+              id={member.id}
+              image={getImageUrl(member.image, platzhalterAvatar)}
+              taetigkeit={member.taetigkeit}
+              name={member.name}
+              bots={member.bots}
+              fach={member.fach}
+              currentSemester={false}
+            />
+          </div>
+        ))}
       </section>
 
 
