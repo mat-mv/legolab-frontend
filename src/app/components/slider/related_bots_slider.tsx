@@ -16,7 +16,7 @@ export default function RelatedBotSlider({ bots }: { bots: Bot[] }) {
   return(
     <div className={styles.slider_container}>
       <span id="prev_button_1" className={["material-symbols-outlined", styles.prev_button].join(" ")}>chevron_left</span>
-      <Swiper slidesPerView={1} spaceBetween={32} breakpoints={{769: {slidesPerView: 2, spaceBetween: 32}, 1025: {slidesPerView: 3, spaceBetween: 32}}} navigation={{enabled: true, nextEl:"#next_button_1", prevEl:"#prev_button_1"}} pagination={{clickable: true,}} modules={[Pagination, Navigation]}>
+      <Swiper slidesPerView={1} spaceBetween={32} breakpoints={{769: {slidesPerView: 2, spaceBetween: 0}, 1025: {slidesPerView: 3, spaceBetween: 0}}} navigation={{enabled: true, nextEl:"#next_button_1", prevEl:"#prev_button_1"}} pagination={{clickable: true,}} modules={[Pagination, Navigation]}>
         {bots.map((bot) => (
           <SwiperSlide key={bot.id}><RelatedBotSliderItem href={bot.slug} title={bot.name} build_difficulty={bot.buildDif} code_difficulty={bot.codeDif} image={bot.image.url} category={bot.category}></RelatedBotSliderItem></SwiperSlide>
         ))}

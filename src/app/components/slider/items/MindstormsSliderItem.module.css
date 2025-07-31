@@ -24,6 +24,7 @@
   background-color: var(--area);
   border-radius: 8px;
   display: block;
+  margin: 24px;
 }
 
 .text_box:hover {

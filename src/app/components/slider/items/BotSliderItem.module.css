@@ -12,6 +12,10 @@
   content: " ›";
 }
 
+.title {
+  hyphens: auto;
+}
+
 .image {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -21,6 +25,7 @@
 }
 
 .text_box {
+  margin: 24px;
   background-color: var(--area);
   border-radius: 8px;
   display: block;
