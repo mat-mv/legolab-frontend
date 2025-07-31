@@ -14,12 +14,9 @@ export interface Bot {
   category: Category,
   slug: string,
   bom: Media,
-  buildHeader: string,
-  buildDescription: string,
-  buildHintHeader: string,
-  buildHintDescription: string,
-  buildInstructionHeader: string,
+  generalBuildHint: string,
   buildInstructionDescription: string,
   ctaButtons: ButtonInterface[],
   teammitglieds: Teammember[];
+
 }

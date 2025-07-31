@@ -132,12 +132,12 @@ export default async function BotSinglePage({ slug, category }: Readonly<BotProp
     }
   }
 
-  console.log("banner URL", banner.ctaButton.href);
-  console.log("teammitglieds", bot.teammitglieds);
-  console.log("category", bot.category)
+
+  console.log("generalBuildHint", bot.generalBuildHint)
   return (
 
     <section>
+      
       {/*Erster Block mit allgemeinen Infos*/}
       <section className={styles.info_block}>
         <div>
@@ -215,10 +215,10 @@ export default async function BotSinglePage({ slug, category }: Readonly<BotProp
       {/*Zweiter Block mit Baunanleitung etc*/}
 
       {/*Wenn es einen Tip gibt, wird dieser hier angezeigt*/}
-      {bot.buildHintDescription && bot.buildHintDescription.trim() !== "" && (
+      {bot.generalBuildHint && bot.generalBuildHint.trim() !== "" && (
         <section className={styles.hint}>
           <strong>{BotPage.BuildHintHeader}</strong>
-          {bot.buildHintDescription}
+          {bot.generalBuildHint}
         </section>
       )}
 
