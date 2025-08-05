@@ -52,11 +52,6 @@ export default async function Home() {
 
   return (
     <section>
-      <section className={styles.announcement}>
-        <div>
-          <ConfettiButton />
-        </div>
-      </section>
       <section className={[styles.hero_section].join(" ")}>
         <div>
           <h1>{home.header}</h1>
