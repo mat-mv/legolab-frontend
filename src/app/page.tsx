@@ -42,14 +42,6 @@ export default async function Home() {
   const strapiData: any = await fetchData("home-page?" + query)
   const home: HomePage = strapiData.data
 
-  // Berechne die Höhe im gleichen Seitenverhältnis von heroImage:
-  const displayHeight = home.heroImage?.width && home.heroImage?.height
-    ? Math.round((400 / home.heroImage?.width) * home.heroImage?.height)
-    : undefined;
-
-
-
-
   return (
     <section>
       <section className={[styles.hero_section].join(" ")}>
@@ -63,8 +55,10 @@ export default async function Home() {
           </div>
         </div>
         <div>
-          <Image className={styles.img} src={`https://www.legolab-karlsruhe.de${home.heroImage.url}`} width={home.heroImage.width} height={home.heroImage.height} alt="Picture"></Image>
-        </div>
+          {home.heroImage && (
+            <Image className={styles.img} src={`https://www.legolab-karlsruhe.de${home.heroImage.url}`} width={home.heroImage.width} height={home.heroImage.height} alt="Picture"></Image>
+          )}
+          </div>
       </section>
       <section className={styles.slider}>
         {home.textBoxes.map((box) => (
