@@ -1,3 +1,6 @@
+/*Beschreibt das Layout der "Team"-Seite. Die Kacheln der Teammitglieder 
+werden von hier mit "MemberKachel" generiert.
+*/
 import Image from "next/image";
 import styles from "./page.module.css";
 import { fetchData } from "../utils/api"; import qs from "qs";
@@ -108,7 +111,6 @@ export default async function Team() {
         });
       return semesters.length ? Math.max(...semesters) : -Infinity;
     }
-    // Reihenfolge umdrehen: b - a
     return getLatestSemester(b.taetigkeit) - getLatestSemester(a.taetigkeit);
   });
 
@@ -116,10 +118,6 @@ export default async function Team() {
   return (
     <section>
       <section className={styles.ueberschriftLeiste}>
-
-
-
-
         <h1 className={[styles.hero_section].join(" ")}>{teampage.title}</h1>
 
         {/*---------Hier kommen alle Professoren hin---------*/}

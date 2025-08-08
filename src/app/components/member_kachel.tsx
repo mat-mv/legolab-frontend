@@ -1,5 +1,7 @@
+/* Hier werden die Daten der Teammitglieder aus "team" übergeben und als einzelne Kachel
+generiert. 
+*/
 "use client";
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -69,7 +71,7 @@ export default function MemberKachel({ id, image, taetigkeit, name, bots,  fach,
 
 
 
-      {/* Overlay */}
+      {/* Overlay/Fokus-Ansicht */}
 
       {isOverlayOpen && (
         <div

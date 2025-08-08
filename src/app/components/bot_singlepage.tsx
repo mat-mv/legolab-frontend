@@ -1,3 +1,6 @@
+/*Seite des einzelnen Bots, bei Click auf einen Bot aus der "Buch" oder "Labor" Seite
+TODO: bot_focus_kachel.tsx soll hier eingebunden werden, sobald die .mpd Integration funktioniert
+*/
 import { fetchData } from "@/app/utils/api"
 import { Bot } from "@/app/utils/interfaces/bot.interface"
 import { BotSinglePage as BotSinglePageInterface } from "@/app/utils/interfaces/bot_single_page.interface"
@@ -133,12 +136,11 @@ export default async function BotSinglePage({ slug, category }: Readonly<BotProp
   }
 
 
-  console.log("generalBuildHint", bot.generalBuildHint)
   return (
 
     <section>
       
-      {/*Erster Block mit allgemeinen Infos*/}
+      {/*------Erster Block mit allgemeinen Infos------*/}
       <section className={styles.info_block}>
         <div>
           {bot.image ? (
@@ -170,7 +172,7 @@ export default async function BotSinglePage({ slug, category }: Readonly<BotProp
               </Link>
             )}
 
-            {/*Wenn der Bot ein Teammitglied hat, zeige es an (im Moment nur das erste eingetragene)*/}
+            {/*Zeige alle Teammitglieder zu dem Bot an*/}
             {Array.isArray(bot.teammitglieds) && bot.teammitglieds.length > 0 && (
               bot.teammitglieds.map((mitglied: { name: string; image?: { url?: string } }, idx: number) => (
                 <Link href="/team" key={idx}>
@@ -212,7 +214,7 @@ export default async function BotSinglePage({ slug, category }: Readonly<BotProp
 
       </section>
 
-      {/*Zweiter Block mit Baunanleitung etc*/}
+      {/*------Zweiter Block mit Baunanleitung etc------*/}
 
       {/*Wenn es einen Tip gibt, wird dieser hier angezeigt*/}
       {bot.generalBuildHint && bot.generalBuildHint.trim() !== "" && (
@@ -223,7 +225,7 @@ export default async function BotSinglePage({ slug, category }: Readonly<BotProp
       )}
 
       <section className={styles.info_block}>
-        {/*Wenn es eine Bom gibt, wird diese hier angezeigt*/}
+        {/*Wenn es eine BOM gibt, wird diese hier angezeigt*/}
         {bot.bom && bot.bom.url !== "" && (
           <div>
             <div>
@@ -262,7 +264,7 @@ export default async function BotSinglePage({ slug, category }: Readonly<BotProp
         )}
 
 
-      </section>
+      </section>{/*Alle im Bot eingepflegten Buttons*/}
       <div className={styles.ctas}>
         {bot.ctaButtons?.map((button) => (
           <Button key={button.id} href={button.href} secondary={button.secondary}>
