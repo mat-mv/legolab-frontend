@@ -1,8 +1,13 @@
 export async function fetchData(endpoint: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://www.legolab-karlsruhe.de/api/";
+  const baseUrl = (
+    process.env.NEXT_PUBLIC_API_URL ||
+    "https://www.legolab-karlsruhe.de/api/"
+  ).replace(/\/$/, "");
 
   try {
-    const response = await fetch(`${baseUrl}${endpoint}`, { next: { tags: ['revalidate'] } });
+    const response = await fetch(`${baseUrl}/${endpoint}`, {
+      next: { tags: ['revalidate'] }
+    });
 
     if (!response.ok) {
       throw new Error(`Fehler beim Abrufen der Daten: ${response.statusText}`);
