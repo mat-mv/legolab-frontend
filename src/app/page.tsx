@@ -56,7 +56,7 @@ export default async function Home() {
         </div>
         <div>
           {home.heroImage && (
-            <Image className={styles.img} src={`https://www.legolab-karlsruhe.de${home.heroImage.url}`} width={home.heroImage.width} height={home.heroImage.height} alt="Picture"></Image>
+            <Image className={styles.img} src={`https://www.legolab-karlsruhe.de${home.heroImage.url}`} width={home.heroImage.width} height={home.heroImage.height} alt="HKA Hero Image" priority></Image>
           )}
           </div>
       </section>

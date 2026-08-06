@@ -13,22 +13,29 @@
     "brick-viewer": "^1.0.0",
     "canvas-confetti": "^1.9.3",
     "material-symbols": "^0.28.1",
-    "next": "^15.5.22",
+    "next": "16.3.0",
     "qs": "^6.14.0",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
     "react-markdown": "^10.1.0",
     "react-tabs": "^6.1.0",
     "rehype-sanitize": "^6.0.0",
     "remark-gfm": "^4.0.1",
-    "swiper": "^11.2.2",
+    "swiper": "^14.0.7",
     "zod": "^3.24.3"
   },
   "devDependencies": {
     "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "brick-viewer": {
+      "three": "^0.125.0"
+    }
   }
 }

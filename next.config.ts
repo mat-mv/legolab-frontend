@@ -5,12 +5,12 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "images.pexels.com",
+        protocol: 'https',
+        hostname: 'images.pexels.com',
       },
       {
-        protocol: "https",
-        hostname: "legolab-karlsruhe.de",
+        protocol: 'https',
+        hostname: 'legolab-karlsruhe.de',
       },
     ],
     unoptimized: true,

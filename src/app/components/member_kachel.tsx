@@ -1,5 +1,7 @@
+/* Hier werden die Daten der Teammitglieder aus "team" übergeben und als einzelne Kachel
+generiert. 
+*/
 "use client";
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -31,7 +33,22 @@ export default function MemberKachel({ id, image, taetigkeit, name, bots,  fach,
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false); // Overlay schließen
   };
+  
 
+
+//Funktion um tätigkeiten nach deren Semester zu sortieren
+  function semesterSort(a: { semester: string }, b: { semester: string }) {
+    const matchA = a.semester?.match(/(WiSe|SoSe)(\d{4})/);
+    const matchB = b.semester?.match(/(WiSe|SoSe)(\d{4})/);
+    if (!matchA) return 1;
+    if (!matchB) return -1;
+    const valueA = parseInt(matchA[2], 10) * 2 + (matchA[1] === "WiSe" ? 1 : 0);
+    const valueB = parseInt(matchB[2], 10) * 2 + (matchB[1] === "WiSe" ? 1 : 0);
+    return valueA - valueB;
+  }
+  const sortedTaetigkeit = Array.isArray(taetigkeit)
+    ? [...taetigkeit].sort(semesterSort)
+    : [];
 
 
 
@@ -69,7 +86,7 @@ export default function MemberKachel({ id, image, taetigkeit, name, bots,  fach,
 
 
 
-      {/* Overlay */}
+      {/* Overlay/Fokus-Ansicht */}
 
       {isOverlayOpen && (
         <div
@@ -100,18 +117,16 @@ export default function MemberKachel({ id, image, taetigkeit, name, bots,  fach,
                 <h3 className={styles.titel}>{name}</h3>
                 <p>Studiengang: {fach}</p>
 
-
+                {/* Semester und Studiengang, nach Semester sortiert */}
                 <div className={styles.semesterList}>
-                  {taetigkeit.map((taet) => taet.semester).join(", ")}
+                  {sortedTaetigkeit.map((taet) => taet.semester).join(", ")}
                 </div>
-
-                {taetigkeit.map((taet) =>
+                {sortedTaetigkeit.map((taet) =>
                   taet.arbeit && (<p className={styles.semesterKachel} key={taet.semester}>
                     {taet.arbeit}
                   </p>
                   )
                 )}
-
               </div>
             </div>
 
