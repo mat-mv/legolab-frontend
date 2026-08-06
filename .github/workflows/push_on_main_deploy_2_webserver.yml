@@ -20,4 +20,5 @@ jobs:
 
       - name: Run deployment script
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@193.196.36.158 "cd /var/www/legolab-karlsruhe.de/main && git pull origin main && npm install && npm run build && pm2 restart nextjs-prod"
+          run: |
+            ssh -o StrictHostKeyChecking=no ubuntu@193.196.36.158 "cd /var/www/legolab-karlsruhe.de/dev && git fetch origin dev && git reset --hard origin/dev && npm install --ignore-scripts && npm run build && pm2 restart nextjs-dev"
