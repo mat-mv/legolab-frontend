@@ -28,6 +28,9 @@ export default async function Team() {
 
 
   const query = qs.stringify({
+    pagination: {
+      pageSize: 100,
+    },
     populate: {
       image: {
         fields: ['url', 'width', 'height'],

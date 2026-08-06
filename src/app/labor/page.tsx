@@ -3,6 +3,7 @@ import BotCategory from "../components/bot_category";
 import styles from "./page.module.css";
 import { fetchData } from "../utils/api";
 import { Category } from "../utils/interfaces/category.interface";
+import { sortCategoriesBySemesterDesc } from "../utils/sortSemesters";
 
 export default async function Labor() {
 
@@ -23,9 +24,9 @@ export default async function Labor() {
         },
       },
     })
-    
+
     const strapiData:any = await fetchData("categories?" + query)
-    const categories:Category[] = strapiData.data
+    const categories:Category[] = sortCategoriesBySemesterDesc(strapiData.data)
 
     
     return (

@@ -4,6 +4,7 @@ import styles from "./page.module.css";
 import { fetchData } from "../utils/api";
 import { Category } from "../utils/interfaces/category.interface";
 import BuchBanner from "../components/buch_banner";
+import { sortCategoriesBySemesterDesc } from "../utils/sortSemesters";
 
 export default async function Buch() {
 
@@ -24,9 +25,9 @@ export default async function Buch() {
         },
       },
     })
-    
+
     const strapiData:any = await fetchData("categories?" + query)
-    const categories:Category[] = strapiData.data
+    const categories:Category[] = sortCategoriesBySemesterDesc(strapiData.data)
 
     
     return (
