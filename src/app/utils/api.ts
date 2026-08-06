@@ -1,8 +1,12 @@
-export async function fetchData(endpoint: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://www.legolab-karlsruhe.de/api/";
+function buildUrl(endpoint: string): string {
+  const baseUrl = (process.env.NEXT_PUBLIC_API_URL || "https://www.legolab-karlsruhe.de/api").replace(/\/$/, "");
+  const path = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+  return `${baseUrl}${path}`;
+}
 
+export async function fetchData(endpoint: string) {
   try {
-    const response = await fetch(`${baseUrl}${endpoint}`, { next: { tags: ['revalidate'] } });
+    const response = await fetch(buildUrl(endpoint), { next: { tags: ['revalidate'] } });
 
     if (!response.ok) {
       throw new Error(`Fehler beim Abrufen der Daten: ${response.statusText}`);
@@ -16,10 +20,8 @@ export async function fetchData(endpoint: string) {
 }
 
 export async function postData(endpoint: string, data: any) {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://www.legolab-karlsruhe.de/api/";
-
   try {
-    const response = await fetch(`${baseUrl}${endpoint}`, {
+    const response = await fetch(buildUrl(endpoint), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
