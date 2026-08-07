@@ -120,6 +120,8 @@
   border-radius: 8px;
   width: 80%;
   max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
   text-align: left;
   position: relative;
   display: flex;
@@ -159,10 +161,11 @@
   position: relative;
   display: flex;
   flex-direction: row; /* Stellt sicher, dass Bots unterhalb von Bild und Text stehen */
+  flex-wrap: wrap;
   align-items: flex-start; /* Bild und Text oben ausrichten */
-  gap: 32px; /* Abstand zwischen den Abschnitten */
-  margin-left: 32px;
-  margin-right: 32px;
+  gap: 16px; /* Abstand zwischen den Abschnitten */
+  margin-left: 16px;
+  margin-right: 16px;
   margin-bottom: 16px;
 }
 
@@ -236,4 +239,27 @@
 
 .image {
   border-radius: 8px;
+}
+
+@media only screen and (max-width: 600px) {
+  .overlayContent {
+    width: 92%;
+  }
+
+  .overlayContent .innerStructure {
+    flex-direction: column;
+  }
+
+  .overlayContent .image {
+    max-width: 100%;
+  }
+
+  .overlayContent .text {
+    margin: 16px;
+  }
+
+  .bots {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
 }

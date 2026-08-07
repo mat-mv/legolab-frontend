@@ -1,5 +1,6 @@
 .input_field {
     margin-bottom: 2rem;
+    min-width: 0;
 }
 
 .h_input_field {
@@ -44,9 +45,23 @@ input.error, textarea.error {
     gap: 32px;
 }
 
+@media only screen and (max-width: 600px) {
+    .col_2 {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
 .contact_form {
     padding: 32px;
     border: 2px var(--border) solid;
     border-radius: var(--border-radius);
     grid-column: span 2;
+    min-width: 0;
+}
+
+@media only screen and (max-width: 1024px) {
+    .contact_form {
+        grid-column: span 1;
+    }
 }
