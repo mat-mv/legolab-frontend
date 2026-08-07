@@ -13,6 +13,9 @@ import Image from "next/image";
 import BotFocusKachel from "@/app/components/bot_focus_kachel"
 import Link from "next/link";
 import { Button as ButtonInterface } from "@/app/utils/interfaces/button.interface";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeSanitize from "rehype-sanitize";
 
 interface BotProps {
   slug: string,
@@ -208,7 +211,9 @@ export default async function BotSinglePage({ slug, category }: Readonly<BotProp
           </div>
 
           <div className={styles.content}>
-            {bot.description}
+            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
+              {bot.description}
+            </ReactMarkdown>
           </div>
         </div>
 
