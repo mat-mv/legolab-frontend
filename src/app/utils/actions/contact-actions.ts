@@ -4,11 +4,14 @@ import { z, ZodEffects } from "zod";
 import { postData } from "../api";
 import { verify } from "crypto";
 
+const MIN_FILL_TIME_MS = 2000;
+
 const schemaRegister = z.object({
-    vorname: z.string().min(1, "Bitte gebe einen Vornamen ein.").max(256, "Ihr Vorname ist zu lang."),
-    nachname: z.string().min(1, "Bitte gebe einen Nachnamen ein.").max(256, "Ihr Nachname ist zu lang."),
-    nachricht: z.string().min(1, "Bitte gebe eine Nachricht ein.").max(1000, "Ihre Nachricht ist zu lang."),
+    vorname: z.string().trim().min(1, "Bitte gebe einen Vornamen ein.").max(256, "Ihr Vorname ist zu lang."),
+    nachname: z.string().trim().min(1, "Bitte gebe einen Nachnamen ein.").max(256, "Ihr Nachname ist zu lang."),
+    nachricht: z.string().trim().min(1, "Bitte gebe eine Nachricht ein.").max(1000, "Ihre Nachricht ist zu lang."),
     eMailAdresse: z.string()
+        .trim()
         .min(1, "Diese Feld darf nicht leer sein.")
         .email("Bitte gebe eine gültige E-Mail-Adresse ein.")
         .max(256, "Ihr E-Mail-Adresse ist zu lang.")
@@ -23,7 +26,10 @@ export async function sendContactFormAction(prevState: any, formData: FormData) 
         verify_email: formData.get("verify_email"),
     }
 
-    if (rawData.verify_email !== "") {
+    const renderedAt = Number(formData.get("rendered_at"));
+    const filledInTime = !renderedAt || (Date.now() - renderedAt) < MIN_FILL_TIME_MS;
+
+    if (rawData.verify_email !== "" || filledInTime) {
         return {
             ...prevState,
             zodErrors: null,
@@ -62,9 +68,10 @@ export async function sendContactFormAction(prevState: any, formData: FormData) 
 
 
     if (responseData.error) {
+        console.error("Strapi error on kontaktanfragen create:", responseData.error);
         return {
             ...prevState,
-            strapiErrors: responseData.error,
+            strapiErrors: responseData.error.message || "Failed to send message.",
             zodErrors: null,
             message: "Failed to send message.",
             success: false,

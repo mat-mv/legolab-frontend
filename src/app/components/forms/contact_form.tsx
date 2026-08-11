@@ -12,6 +12,7 @@ const INITIAL_STATE = {
 export default function ContactForm() {
 
     const [formState, formAction, isPending] = useActionState(sendContactFormAction, INITIAL_STATE);
+    const [renderedAt] = useState(() => Date.now());
 
     return (
         <div className={styles.contact_form}>
@@ -53,6 +54,7 @@ export default function ContactForm() {
                         <label htmlFor="verify_email">E-Mail-Adresse bestätigen</label>
                         <input type="text" maxLength={256} id="verify_email" name="verify_email" defaultValue="" readOnly />
                     </div>
+                    <input type="hidden" name="rendered_at" value={renderedAt} />
                     <button className="button" disabled={isPending}>Absenden</button>
                 </form>
             }

@@ -21,11 +21,17 @@ export async function fetchData(endpoint: string) {
 
 export async function postData(endpoint: string, data: any) {
   try {
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+    };
+
+    if (process.env.STRAPI_API_TOKEN) {
+      headers["Authorization"] = `Bearer ${process.env.STRAPI_API_TOKEN}`;
+    }
+
     const response = await fetch(buildUrl(endpoint), {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
       body: JSON.stringify({ ...data }),
     })
 
