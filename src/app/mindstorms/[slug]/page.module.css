@@ -57,13 +57,29 @@
 
 .image {
   border-radius: var(--border-radius);
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .content_section {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 32px;
   width: 100%;
+}
+
+.top_row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 32px;
+  width: 100%;
+}
+
+.imageWrapper {
+  flex: 0 0 400px;
+  max-width: 400px;
 }
 
 .content {
@@ -94,6 +110,35 @@
   color: var(--primary);
 }
 
+.markdown table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  margin: 1.5em 0;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.markdown th,
+.markdown td {
+  vertical-align: top;
+  text-align: left;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--area);
+}
+
+.markdown th {
+  vertical-align: top;
+  color: var(--foreground);
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary);
+}
+
+.markdown tbody tr:nth-child(even) {
+  background-color: var(--area);
+}
+
 .related_bots {
   width: 66%;
   margin: 64px auto 0 auto;
@@ -104,8 +149,14 @@
 }
 
 @media only screen and (max-width: 1024px) {
-  .content_section {
+  .top_row {
     flex-direction: column;
+  }
+
+  .imageWrapper {
+    flex: 0 0 auto;
+    max-width: 400px;
+    width: 100%;
   }
 }
 
