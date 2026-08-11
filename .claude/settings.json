@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(curl -vI --max-time 10 --ssl-no-revoke https://dev.legolab-karlsruhe.de/)"
     ]
   }
 }
