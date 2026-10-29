@@ -1,9 +1,7 @@
-name: CI/CD Workflow to Nginx for branch main
+name: Deploy main (manuell)
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 concurrency:
   group: deploy-frontend-main
@@ -13,28 +11,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-
       - name: Load SSH key
         uses: webfactory/ssh-agent@v0.10.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          git-cmd: true
 
-      - name: Run deployment script
-        run: |
-          ssh -o StrictHostKeyChecking=no mrma0001@217.160.106.162 '
-            set -euo pipefail
-            export PATH="$HOME/.nvm/versions/node/v24.5.0/bin:$PATH"
-            node -v
-            cd /var/www/legolab-karlsruhe.de/main
-            git fetch origin main
-            git reset --hard origin/main
-            npm ci --ignore-scripts
-            npm run build
-            pm2 restart nextjs-prod
-            pm2 save
-            sleep 5
-            curl -fsS -o /dev/null http://127.0.0.1:3001/
-          '
+      - name: Deploy
+        run: ssh -o StrictHostKeyChecking=no mrma0001@217.160.106.162 main
