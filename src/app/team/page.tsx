@@ -1,4 +1,4 @@
-/*Beschreibt das Layout der "Team"-Seite. Die Kacheln der Teammitglieder 
+/*Beschreibt das Layout der "Team"-Seite. Die Kacheln der Teammitglieder
 werden von hier mit "MemberKachel" generiert.
 */
 import Image from "next/image";
@@ -85,27 +85,39 @@ export default async function Team() {
   );
 
 
-  //Mache eine Liste an aktuellen Mitgliedern, 
-  // um zu schauen ob der erste Block angezeigt werden soll
+  //Liefert die Tätigkeiten als Liste - auch dann, wenn das Feld
+  //in Strapi fehlt oder leer ist. Verhindert, dass solche Einträge
+  //aus allen Listen herausfallen.
+  const taetigkeitenVon = (member: Teammember) =>
+    Array.isArray(member.taetigkeit) ? member.taetigkeit : [];
+
+  //Reine Leitungspersonen werden oben als eigener Block dargestellt
+  //und erscheinen daher weder bei den aktuellen noch bei den ehemaligen.
+  const istNurLeitung = (member: Teammember) => {
+    const taetigkeiten = taetigkeitenVon(member);
+    return taetigkeiten.length > 0 &&
+      taetigkeiten.every(t => t.arbeit === "Leitung");
+  };
+
+  //Aktuelle Mitglieder: mindestens eine Tätigkeit im laufenden Semester
   const aktuelleMitglieder = members.filter(member =>
-    Array.isArray(member.taetigkeit) &&
-    member.taetigkeit.some(t => t.semester === semesterString) &&
-    member.taetigkeit.some(t => t.arbeit !== "Leitung")
+    !istNurLeitung(member) &&
+    taetigkeitenVon(member).some(t => t.semester === semesterString)
   );
 
-  //Mache eine Liste an ehemaligen Mitgliedern
-  const ehemalige = members
-    .filter(member =>
-      !Array.isArray(member.taetigkeit) ||
-      !member.taetigkeit.some(t => t.semester === semesterString) &&
-      member.taetigkeit.some(t => t.arbeit !== "Leitung")
-    );
+  //Ehemalige: alles Übrige. Auch Einträge ganz ohne Tätigkeit landen
+  //hier, damit unvollständige Datensätze sichtbar bleiben statt
+  //unbemerkt zu verschwinden.
+  const ehemalige = members.filter(member =>
+    !istNurLeitung(member) &&
+    !aktuelleMitglieder.includes(member)
+  );
 
-  //Sortiere die ehemaligen Mitglieder nach dem letzten Semester
-  const sortierteEhemalige = ehemalige.sort((a, b) => {
-    function getLatestSemester(taetigkeit: any[]) {
-      if (!Array.isArray(taetigkeit)) return -Infinity;
-      const semesters = taetigkeit
+  //Sortiere die ehemaligen Mitglieder nach dem letzten Semester.
+  //Kopie, damit die Ursprungsliste unverändert bleibt.
+  const sortierteEhemalige = [...ehemalige].sort((a, b) => {
+    function getLatestSemester(member: Teammember) {
+      const semesters = taetigkeitenVon(member)
         .filter(t => typeof t.semester === "string")
         .map(t => {
           const match = t.semester.match(/(WiSe|SoSe)(\d{4})/);
@@ -114,7 +126,7 @@ export default async function Team() {
         });
       return semesters.length ? Math.max(...semesters) : -Infinity;
     }
-    return getLatestSemester(b.taetigkeit) - getLatestSemester(a.taetigkeit);
+    return getLatestSemester(b) - getLatestSemester(a);
   });
 
 
@@ -127,10 +139,7 @@ export default async function Team() {
         <div className={styles.profList}>
           {members
             .filter(member =>
-              Array.isArray(member.taetigkeit) &&
-              member.taetigkeit.some(t => {
-                return t.arbeit === "Leitung";
-              })
+              taetigkeitenVon(member).some(t => t.arbeit === "Leitung")
             )
             .map(member => (
               <div key={member.id} className={styles.profBlock}>
