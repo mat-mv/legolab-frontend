@@ -1,0 +1,58 @@
+name: Zertifikatslaufzeit pruefen
+
+# Prueft woechentlich von aussen, wie lange die TLS-Zertifikate noch gueltig
+# sind, und schlaegt fehl, wenn weniger als SCHWELLE Tage bleiben.
+# Let's Encrypt verschickt keine Ablaufwarnungen mehr, und auf dem Server
+# ist kein Mailversand eingerichtet - die Benachrichtigung laeuft daher
+# ueber GitHubs Mail bei fehlgeschlagenen Workflows.
+
+on:
+  schedule:
+    # Montags um 06:17 UTC
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+jobs:
+  pruefen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restlaufzeit der Zertifikate pruefen
+        run: |
+          set -uo pipefail
+
+          SCHWELLE=20
+          FEHLER=0
+
+          for HOST in legolab-karlsruhe.de www.legolab-karlsruhe.de dev.legolab-karlsruhe.de; do
+            ENDE=$(echo \
+              | openssl s_client -connect "$HOST:443" -servername "$HOST" 2>/dev/null \
+              | openssl x509 -noout -enddate 2>/dev/null \
+              | cut -d= -f2)
+
+            if [ -z "$ENDE" ]; then
+              echo "::error title=$HOST::Zertifikat nicht abrufbar - Server erreichbar?"
+              FEHLER=1
+              continue
+            fi
+
+            TAGE=$(( ( $(date -d "$ENDE" +%s) - $(date +%s) ) / 86400 ))
+            printf '%-32s %4d Tage (bis %s)\n' "$HOST" "$TAGE" "$ENDE"
+
+            if [ "$TAGE" -lt 0 ]; then
+              echo "::error title=$HOST::Zertifikat ist ABGELAUFEN"
+              FEHLER=1
+            elif [ "$TAGE" -lt "$SCHWELLE" ]; then
+              echo "::error title=$HOST::Nur noch $TAGE Tage gueltig - Verlaengerung pruefen"
+              FEHLER=1
+            fi
+          done
+
+          if [ "$FEHLER" -ne 0 ]; then
+            echo
+            echo "Auf dem Server pruefen:"
+            echo "  sudo certbot certificates"
+            echo "  systemctl list-timers certbot.timer"
+            echo "  sudo journalctl -u certbot.service --since '-14 days'"
+          fi
+
+          exit $FEHLER
