@@ -16,6 +16,7 @@ import { Button as ButtonInterface } from "@/app/utils/interfaces/button.interfa
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeSanitize from "rehype-sanitize";
+import LegoViewer from "@/app/components/lego_viewer"; // <-- Hier importiert
 
 interface BotProps {
   slug: string,
@@ -254,7 +255,8 @@ export default async function BotSinglePage({ slug, category }: Readonly<BotProp
           <div>
             <h3>{BotPage.BuildInstructionHeader}</h3>
             <div>
-              {platzhalterAnleitung?.textcontent}
+           {/*{platzhalterAnleitung?.textcontent}*/}
+              <LegoViewer />
             </div>
 
             {/*Sobald die .mpd Integration funktioniert, soll die Bauanleitung hier erscheinen
@@ -265,6 +267,7 @@ export default async function BotSinglePage({ slug, category }: Readonly<BotProp
               botName={bot.name}
             />
             */}
+
           </div>
         )}
 
