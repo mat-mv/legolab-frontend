@@ -1,12 +1,14 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import 'material-icons/iconfont/material-icons.css';
+import 'brick-viewer';
 
 interface LegoViewerProps {
   src?: string;
   title?: string;
+  fallbackText?: ReactNode;
 }
 
 const iconButton: React.CSSProperties = {
@@ -22,8 +24,9 @@ const iconButton: React.CSSProperties = {
 };
 
 export default function LegoViewer({
-  src = '/models/Veronika.mpd',
+  src,
   title = 'Bauanleitung',
+  fallbackText,
 }: LegoViewerProps) {
   const [ready, setReady] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -74,6 +77,11 @@ export default function LegoViewer({
     setOpen(false);
   };
 
+  //Wenn KEINE .mpd-Datei da ist, zeige einfach den Platzhalter-Text!
+  if (!src) {
+    return <div>{fallbackText || "Keine Anleitung verfügbar."}</div>;
+  }
+
   const viewer = (
     <brick-viewer
       src={src}
@@ -93,8 +101,8 @@ export default function LegoViewer({
         style={{
           position: 'relative',
           width: '100%',
-          height: 450, // Feste Höhe vergeben, damit der Kasten nicht kollabiert
-          background: '#e9ecef', // Neutraler Hintergrund, um zu sehen, ob der Container da ist
+          height: 450,
+          background: '#e9ecef',
           borderRadius: 12,
           overflow: 'hidden',
           boxShadow: hovered ? '0 6px 20px rgba(0,0,0,0.18)' : '0 1px 4px rgba(0,0,0,0.08)',
@@ -152,7 +160,6 @@ export default function LegoViewer({
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
                   padding: '12px 16px',
                 }}
               >

@@ -16,7 +16,7 @@ import { Button as ButtonInterface } from "@/app/utils/interfaces/button.interfa
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeSanitize from "rehype-sanitize";
-import LegoViewer from "@/app/components/lego_viewer"; // <-- Hier importiert
+import LegoViewer from "@/app/components/lego_viewer";
 
 interface BotProps {
   slug: string,
@@ -29,6 +29,9 @@ interface Banner {
   image: ImageInterface,
   ctaButton: ButtonInterface,
 }
+
+// Eine Liste aller Bot-Namen, die einen 3D-Viewer statt des Platzhalters bekommen
+const botsWithViewer = ["Veronika"];
 
 
 export default async function BotSinglePage({ slug, category }: Readonly<BotProps>) {
@@ -254,19 +257,18 @@ export default async function BotSinglePage({ slug, category }: Readonly<BotProp
         {bot.buildInstructionDescription && bot.buildInstructionDescription.trim() !== "" && (
           <div>
             <h3>{BotPage.BuildInstructionHeader}</h3>
-            <div>
-           {/*{platzhalterAnleitung?.textcontent}*/}
-              <LegoViewer />
-            </div>
-
-            {/*Sobald die .mpd Integration funktioniert, soll die Bauanleitung hier erscheinen
-            <BotFocusKachel
-              tip={bot.buildInstructionDescription}
-              platzhalterAnleitung={platzhalterAnleitung?.textcontent}
-              platzhalterBildUrl={platzhalterAnleitung?.bild?.url ? `https://www.legolab-karlsruhe.de${platzhalterAnleitung.bild.url}` : undefined}
-              botName={bot.name}
-            />
-            */}
+            
+            {/* Prüfen, ob der Bot in der Liste für 3D-Viewer steht */}
+            {botsWithViewer.includes(bot.name) ? (
+              <div style={{ marginTop: '20px' }}>
+                {/* Dynamischer Pfad basierend auf dem Namen (z.B. /models/Tic-Tac-Toe.mpd) */}
+                <LegoViewer src={`/models/${bot.name}.mpd`} title={bot.name} />
+              </div>
+            ) : (
+              <div>
+                {platzhalterAnleitung?.textcontent}
+              </div>
+            )}
 
           </div>
         )}
