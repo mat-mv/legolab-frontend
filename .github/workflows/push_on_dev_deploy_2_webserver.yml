@@ -18,5 +18,18 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      # Host-Key des Servers fest hinterlegen, damit der Workflow nur mit
+      # dem echten Server spricht (kein StrictHostKeyChecking=no).
+      - name: Known hosts setzen
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
       - name: Deploy
-        run: ssh -o StrictHostKeyChecking=no mrma0001@217.160.106.162 dev
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: ssh -o StrictHostKeyChecking=yes "$SSH_USER@$SSH_HOST" dev
