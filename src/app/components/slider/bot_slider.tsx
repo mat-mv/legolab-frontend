@@ -13,12 +13,15 @@ import { usePathname } from "next/navigation";
 
 
 export default function BotSlider({ bots }: { bots: Bot[] }) {
+  // Hook einmal oben aufrufen, nicht im map()-Callback (Rules of Hooks)
+  const pathname = usePathname();
+
   return(
     <div className={styles.slider_container}>
       <span id="prev_button_1" className={["material-symbols-outlined", styles.prev_button].join(" ")}>chevron_left</span>
       <Swiper className={styles.swiper} slidesPerView={1} spaceBetween={0} breakpoints={{769: {slidesPerView: 2, spaceBetween: 0}, 1025: {slidesPerView: 3, spaceBetween: 0}}} navigation={{enabled: true, nextEl:"#next_button_1", prevEl:"#prev_button_1"}} pagination={{clickable: true,}} modules={[Pagination, Navigation]}>
         {bots.map((bot) => (
-          <SwiperSlide key={bot.id}><BotSliderItem href={usePathname() + "/" + bot.slug} title={bot.name} build_difficulty={bot.buildDif} code_difficulty={bot.codeDif} image={bot.image} ><p>{bot.shortDescription}</p></BotSliderItem></SwiperSlide>
+          <SwiperSlide key={bot.id}><BotSliderItem href={pathname + "/" + bot.slug} title={bot.name} build_difficulty={bot.buildDif} code_difficulty={bot.codeDif} image={bot.image} ><p>{bot.shortDescription}</p></BotSliderItem></SwiperSlide>
         ))}
       </Swiper>
       <span id="next_button_1" className={["material-symbols-outlined", styles.next_button].join(" ")}>chevron_right</span>

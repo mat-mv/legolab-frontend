@@ -117,7 +117,7 @@ Kein direkter Push auf `dev` oder `main`. Aufgaben stehen als [Issues](https://g
 - **Server zuerst:** Komponenten sind standardmäßig Server Components. `"use client"` nur, wenn ihr State, Effekte oder Browser-APIs braucht.
 - **Browser-Bibliotheken** (z. B. `brick-viewer`) nur dynamisch im `useEffect` importieren, sonst bricht das Server-Rendering ab.
 - **Sprache:** Oberflächentexte auf Deutsch, Code-Bezeichner gern Englisch.
-- **Vor dem PR:** `npm run build` muss lokal fehlerfrei durchlaufen.
+- **Vor dem PR:** `npm run lint` ohne Fehler und `npm run build` erfolgreich.
 
 ## Deployment und Caching
 
@@ -131,6 +131,7 @@ Kein direkter Push auf `dev` oder `main`. Aufgaben stehen als [Issues](https://g
 | --- | --- |
 | `npm run dev` | Entwicklungsserver auf http://localhost:3000 |
 | `npm run build` | Produktions-Build (vor jedem PR ausführen) |
+| `npm run lint` | Code mit ESLint prüfen (vor jedem PR ausführen) |
 | `npm run start` | Gebauten Stand lokal starten |
 
 ## Ansprechpartner

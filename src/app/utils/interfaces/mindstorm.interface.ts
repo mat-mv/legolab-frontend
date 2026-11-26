@@ -10,7 +10,7 @@ export interface Mindstorm {
   longDescRTMD: string,
   date: string,
   bots: Bot[],
-  developerboard: String,
+  developerboard: string,
   legoSetNumber: number,
   infrared: boolean,
   bluetooth: boolean,
